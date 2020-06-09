@@ -24,3 +24,4 @@ export default {
         weight700 : "700"
     }
 };
+

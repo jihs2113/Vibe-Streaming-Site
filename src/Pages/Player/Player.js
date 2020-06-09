@@ -4,6 +4,7 @@ import PlayerBottom from "./Components/PlayerBottom/PlayerBottom";
 import PlayerTop from "./Components/PlayerTop/PlayerTop";
 import url from "./background.PNG";
 
+
 function Player () {
   const [show, setShow] = useState(true);
   const [urlSmall, setUrlSmall] = useState("");
@@ -18,6 +19,7 @@ function Player () {
     </PlayerTag>
   )
 };
+
 
 
 

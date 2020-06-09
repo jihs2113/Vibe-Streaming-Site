@@ -36,10 +36,8 @@ function SearchInput({ isSearch }) {
 
     useEffect(() => {
         if(inputs.artist.length === 0 ) {
-            console.log("없을 떄")
             setShowKeyWord(false);
         } else if(inputs.artist.length > 1) {
-            console.log("있을 때")
             setShowKeyWord(true);
         }
     },[inputs]);

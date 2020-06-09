@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import SideNav from '../../Components/SideNav/SideNav';
+import SideNav from '../../../Components/SideNav/SideNav';
+import MypageExistArtist from './MypageExistArtist';
 
 function MypageArtists () {
+  const [ stateLike, setStateLike ] = useState(true);
+  const [ artistArray, setArtistArray ] = useState([]);
+
+  const onRemove = (artist) => {
+    console.log("onRemove: ", artist);
+    const selectArtist = [...artistArray];
+    const i = selectArtist.indexOf(artist);
+    artistArray[i] ={...artist};
+    setArtistArray(
+      artistArray.filter(artistArray => artistArray.artist_id !== artist.artist_id)
+    );
+  };
+
+  useEffect(() => {
+    fetch("http://localhost:3000/jt_data/jt.json")
+      .then(res => res.json())
+      .then(res => setArtistArray(res.artist));
+  },[]);
+
   return (
     <MypageArtistTag>
       <SideNav />
@@ -14,12 +34,24 @@ function MypageArtists () {
               <AreaSubTit>아티스트</AreaSubTit>
             </TitleBox>
           </TitleWrap>
-          <Inner>
-            <InnerArea>
-              <AreaTit>좋아하는 아티스트</AreaTit>
-              <SubTit>내가 좋아하는 아티스트를 보관함에서 확인해보세요.</SubTit>
-            </InnerArea>
-          </Inner>
+          {
+            artistArray.length > 0 && artistArray ?
+            (
+              <MypageExistArtist 
+                stateLike={stateLike} 
+                onRemove={onRemove} 
+                artistArray={artistArray} 
+              />
+             
+            ) : (
+              <Inner>
+                <InnerArea>
+                  <AreaTit>좋아하는 아티스트</AreaTit>
+                  <SubTit>내가 좋아하는 아티스트를 보관함에서 확인해보세요.</SubTit>
+                </InnerArea>
+              </Inner>   
+            )
+          }
         </Content>
       </Container>
     </MypageArtistTag>
@@ -50,7 +82,7 @@ const Content = styled.div`
 `;
 
 const TitleWrap = styled.h2`
-  padding: 41px 0 48px;
+  padding: 41px 0 0;
 `;
 
 const TitleBox = styled.div`
@@ -94,3 +126,4 @@ const SubTit = styled.p`
     line-height: 1.4;
     color: ${props => props.theme.color.darkGrey};
 `;
+

@@ -1,1 +1,37 @@
-jt
+{
+    "artist" : [
+        {
+            "artist_id" : 1,
+            "artist_name" : "아이유",
+            "artist_img" : "https://musicmeta-phinf.pstatic.net/artist/000/112/112579.jpg?type=ff300_300&v=20200508101508"
+        },
+        {
+            "artist_id" : 2,
+            "artist_name" : "빈지노",
+            "artist_img" : "https://musicmeta-phinf.pstatic.net/artist/000/116/116976.jpg?type=ff300_300&v=20190423142957https://musicmeta-phinf.pstatic.net/artist/000/116/116976.jpg?type=ff300_300&v=20190423142957"
+        },
+        {
+            "artist_id" : 3,
+            "artist_name" : "임창정",
+            "artist_img": "https://musicmeta-phinf.pstatic.net/artist/000/000/222.jpg?type=ff300_300&v=20190906141802"
+        },
+        {
+            "artist_id" : 4,
+            "artist_name" : "조정석",
+            "artist_img": "https://musicmeta-phinf.pstatic.net/artist/000/077/77391.jpg?type=ff300_300&v=20200331181507"
+        }
+    ],
+    "playlist" : [
+        {
+            "playlist_id" : 1,
+            "playlist_name" : "FeelTheVibe",
+            "playlist_number" : 3
+        },
+        {
+            "playlist_id" : 2,
+            "playlist_name" : "naverVibe",
+            "playlist_number" : 1
+        }
+    ]
+    
+}
