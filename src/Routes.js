@@ -9,6 +9,8 @@ import MypageAlbums from "./Pages/Mypage/MypageAlbums";
 import MypagePlaylists from "./Pages/Mypage/MypagePlaylists";
 import Player from "./Pages/Player/Player"; // jintae - 첫 번째 character 대문자로 수정
 import Pidenav from "./Components/SideNav/SideNav"; // jintae - 첫 번째 character 대문자로 수정
+import TopChart from "./Pages/Chart/TopChart";
+import MainChart from "./Pages/Chart/MainChart";
 
 class Routes extends Component {
   render() {
@@ -18,12 +20,14 @@ class Routes extends Component {
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/Chart" component={Chart} />
+          <Route exact path="/topChart" component={TopChart} />
           <Route exact path="/MyPageMusics" component={MypageMusics} />
           <Route exact path="/MypageArtists" component={MypageArtists} />
           <Route exact path="/MypageAlbums" component={MypageAlbums} />
           <Route exact path="/MypagePlaylists" component={MypagePlaylists} />
           <Route exact path="/player" component={Player} /> {/* jintae - 첫 번째 character 대문자로 수정 */}
           <Route exact path="/sidenav" component={Pidenav} /> {/* jintae - 첫 번째 character 대문자로 수정 */}
+          <Route exact path="/MainChart" component={MainChart}/>
         </Switch>
       </Router>
     );
