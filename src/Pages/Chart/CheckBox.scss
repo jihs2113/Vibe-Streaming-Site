@@ -1,0 +1,25 @@
+.OneMusic{
+    display: flex;
+    align-items: center;
+    padding: 0.5em 0;
+   justify-content: column;
+    .PointCheck{
+        width: 1.2em;
+        height: 1.2em;
+        background: #fff;
+        float: left;
+        border: 3px solid #fff;
+        border-radius: 1px;
+        
+    }
+    
+    .PointMusic{
+        margin-left: 0.7em;
+        background-color: transparent;
+        list-style: none;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-size: 0.8rem;
+        color: #b2ada6;
+    }
+}

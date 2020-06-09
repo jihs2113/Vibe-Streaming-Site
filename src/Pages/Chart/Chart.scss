@@ -1,0 +1,156 @@
+.body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.25em;
+    background-color: #fbfbfb;
+	
+    .sideBar{
+        bottom: 81px;
+        left: 0;
+        width: 225px;
+        background-color: black;
+        position: fixed;
+        top: 0;
+        z-index: 10100;
+    }
+    .container{
+        padding-bottom: 467px;
+        min-height: 600px;
+        padding-left: 225px;
+        background-color: #fbfbfb;
+        .content{
+           
+            position: relative;
+            width: 1270px;
+            height: 964px;
+            margin: 4em 3em;
+            background-color: white;
+            span{
+                color: black;
+                font-size: 30px;
+                font-weight: 600;
+            }
+            div{
+                margin: 7px 0 20px;
+                font-size: 13px;
+                line-height: 16px;
+                color: #999;
+            }
+            .playLine{
+                display: flex;
+                flex-direction: row;
+                .topPlay{
+                    padding-right: 10px;
+                    .PlayAll{
+                        width: 134px;
+                        background-color: #ff1150;
+                        border: 1px solid #ff1150;
+                        border-radius: 4px;
+                        height: 40px;
+                        
+                        span{
+                            color: #fff;
+                            font-size: 15px;
+                            font-weight: 400;
+                        }
+                        
+                    }
+                }
+                .topPlay{
+                    padding-right: 10px;
+                    .PlaySelect{
+                        
+                        width: 134px;
+                        border: 1px solid #d7d7d7;
+                        background-color: #fbfbfb;
+                        border-radius: 4px;
+                        height: 40px;
+                        
+                        span{
+                            color: #232323;
+                            font-size: 15px;
+                            font-weight: 400;
+                        }
+                        
+                    }
+                }
+                .more{
+                    width: 42px;
+                    height: 42px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    .mor{
+                        font-size: 13px;
+                    }
+                    
+                    
+                }
+            
+            }
+            .addList{
+                margin-top: 30px;
+                margin-left: -5px;
+                padding-top: 15px;
+                border-top: 1px solid #e4e4e4;
+                display: flex;
+                flex-direction: row;
+                .StoPlay{
+                    padding-right: 10px;
+                    align-items: center;
+                    display: flex;
+                    .StoSelect{
+                        margin: 0 5px;
+                        padding: 9px 12px 11px 18px;
+                        
+                        width: 134px;
+                        border: 1px solid #d7d7d7;
+                        background-color: #fbfbfb;
+                        border-radius: 4px;
+                        height: 36px;
+                        
+                        NextAdd{
+                            color: #232323;
+                            font-size: 13px;
+                            font-weight: 400;
+                        }
+                        
+                    }
+                }
+                .StoPlay{
+                    padding-right: 10px;
+                    align-items: center;
+                    display: flex;
+                    .StoSelect{
+                        margin: 0 5px;
+                        padding: 9px 12px 11px 18px;
+                        align-items: center;
+                        display: flex;
+                        width: 134px;
+                        border: 1px solid #d7d7d7;
+                        background-color: #fbfbfb;
+                        border-radius: 4px;
+                        height: 36px;
+                        
+                        BottomAdd{
+                            color: #232323;
+                            font-size: 13px;
+                            font-weight: 400;
+                        }
+                        
+                    }
+                }
+
+            }
+            .trackList{
+                width: 100%;
+                height: 100%;
+            }
+            
+        }
+        
+    }
+    
+}
