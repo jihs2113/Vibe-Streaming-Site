@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SideNav from '../../Components/SideNav/SideNav';
+import SideNav from '../../../Components/SideNav/SideNav';
 
 function MypageAlbums () {
   return (
@@ -11,7 +11,7 @@ function MypageAlbums () {
           <TitleWrap>
             <TitleBox>
               <Title>보관함</Title>
-              <AreaSubTit>노래</AreaSubTit>
+              <AreaSubTit>앨범</AreaSubTit>
             </TitleBox>
           </TitleWrap>
           <Inner>

@@ -9,17 +9,26 @@ function ExtreMenu() {
       {
         id: 1,
         clazzName: "mymoney",
+        text: "",
         hrefs : "https://vibe.naver.com/wheresmymoney"
       },
       {
         id: 2,
         clazzName: "onstage",
+        text: "",
         hrefs : "https://music.naver.com/onStage/onStageSeason2List.nhn"
       },
       {
         id: 3,
         clazzName: "musicianLeague",
+        text: "",
         hrefs : "https://music.naver.com/musicianLeague/contents/home.nhn"
+      },
+      {
+        id: 4,
+        clazzName: "serviceInfo",
+        text: "서비스 소개",
+        hrefs : "https://vibe.naver.com/about"
       },
     ];
 
@@ -34,14 +43,14 @@ function ExtreMenu() {
                 stateExtra && stateExtra.map(extra => {
                   return (
                     <ExtraList key={extra.id}>
-                      <ExtraLink className={extra.clazzName} href={extra.hrefs} target="_blank"  />
+                      <ExtraLink className={extra.clazzName} href={extra.hrefs} target="_blank">
+                        <ExtraText>{extra.text}</ExtraText>
+                      </ExtraLink>
+                      
                     </ExtraList>
                   );
                 })
               }
-                <ExtraList>
-                  <ExtraText>서비스소개</ExtraText>
-                </ExtraList>
             </ExtraUI>
         </ExtraMenuTag>
     );
