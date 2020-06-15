@@ -7,14 +7,13 @@ import url from "./background.PNG";
 
 function Player () {
   const [show, setShow] = useState(true);
-  const [urlSmall, setUrlSmall] = useState("");
 
   const updateShow = () => {
     setShow(!show);
   }
   return (
     <PlayerTag>
-      <PlayerTop updateShow={updateShow} show = {show} setUrlSmall={setUrlSmall}/>
+      <PlayerTop updateShow={updateShow} show = {show} />
       <PlayerBottom updateShow={updateShow} />
     </PlayerTag>
   )
@@ -24,13 +23,10 @@ function Player () {
 
 
 const PlayerTag = styled.div`
-  background-image: url(${url});
-  background-size: cover;
   position:absolute;
+  width:100%;
   top:0;
-  right:0;
-  left:0;
   bottom:0;
   overflow:hidden;
+  z-index:9999;
 `;
-export default Player;

@@ -1,23 +1,34 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import { connect } from "react-redux";
+import { setPopup } from '../../../../store/actions';
 
-function PlayerMain ({show, mainUpdate, setCurr}) {
+function PlayerMain ({show, mainImg, songInfo, setPopup, popup}) {
+  
+  const [curr, setCurr] = useState(false);
   
   return (
-    <PlayerMainTag show={show} onClick={()=>mainUpdate()}>
-      <MainImg onMouseEnter={()=>setCurr(true)} onMouseLeave={()=>setCurr(false)} src="https://musicmeta-phinf.pstatic.net/album/003/128/3128216.jpg?type=r720Fll&v=20200218131711">
+    <PlayerMainTag popup={popup} onClick={()=>{!curr && setPopup()}}>
+      <MainImg onMouseEnter={()=>setCurr(true)} onMouseLeave={()=>setCurr(false)} src= {songInfo.urlLarge}>
       </MainImg>
     </PlayerMainTag>
   )
 };
 
-export default PlayerMain
+const mapStateToProps = (state) =>{
+  return{
+    songInfo: state.songInfo,
+    popup: state.popup
+  };
+};
+
+export default connect(mapStateToProps, {setPopup})(PlayerMain);
 
 const PlayerMainTag = styled.div`
   background-color: rgba(20,20,20,.97);
   position: absolute;
-  top: ${props=>props.show? '0' : '1000vh'};
-  opacity:${props=>props.show? '1' : '0'};
+  top: ${props=>props.popup? '0' : '1000vh'};
+  opacity:${props=>props.popup? '1' : '0'};
   right: 350px;
   bottom: 81px;
   left: 0;
