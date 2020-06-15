@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {withRouter} from 'react-router-dom';
 import styled, {css} from 'styled-components';
 import icon from '../../Images/vibe.png';
-import SideNav from '../../Components/SideNav/SideNav';
+// import SideNav from '../../Components/SideNav/SideNav';
 import GoChart from './GoChart';
 
 
@@ -20,7 +20,7 @@ function MainChart(props) {
     return (
         <>
        
-        <SideNav/>
+        {/* <SideNav/> */}
         <Container>
             <Content>
                 <Title>차트</Title>
@@ -59,9 +59,10 @@ background: url(${icon}) no-repeat;
 `;
 
 const Container = styled.div`
-  padding-bottom: 467px;
-  height: 100vh;
-  padding-left: 225px;
+  margin-left:20px;
+  margin-bottom:20px;
+ 
+  height: 100%;
   background-color: white;
 
 `
@@ -70,8 +71,6 @@ const Content = styled.div`
       max-width: 1273px;
       position: relative;
       width: 964px;
-      margin-left: 12%;
-      margin-top: 5%;
       background-color: white;
       
 `
