@@ -19,7 +19,7 @@ function Player () {
   )
 };
 
-export default Player
+
 
 const PlayerTag = styled.div`
   background-image: url(${url});
@@ -31,3 +31,4 @@ const PlayerTag = styled.div`
   bottom:0;
   overflow:hidden;
 `;
+export default Player;
