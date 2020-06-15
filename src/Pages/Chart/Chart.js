@@ -5,14 +5,11 @@ import icon from '../../Images/vibe.png';
 import TopChart from './TopChart';
 import SideNav from '../../Components/SideNav/SideNav';
 
-
-
 function Chart () {
   let date = new Date();
   let day = date.getDate();
   const [time] = useState([day]);
   // const [scrollState , setScrollState] = useState(false);
-
   // useEffect(() => {
   //   window.addEventListener("scroll", () => {
   //     const isTop = window.scrollY <100 ;
@@ -21,12 +18,9 @@ function Chart () {
   //     } else {
   //       setScrollState({scrollState: false});
   //     }
-
   //   });
-
   // }, []);
   const useScroll = () => {
-    
     const [state, setState] = useState({
       x: 0,
       y: 0
@@ -42,8 +36,13 @@ function Chart () {
     }, []);
     return state;
   };
-  const { y } = useScroll();
 
+  // const useClick = () =>{
+
+  // }
+
+  const { y } = useScroll();
+  // const { w } = useClick();
     return ( 
       <>
         <Nav style={{opacity: y> 80 ? "1" : "0"}}>
@@ -62,6 +61,28 @@ function Chart () {
             </TopicPlay>
           </Bar>
         </Nav>
+
+        <Option>
+              <span>sd</span>
+        </Option>
+        {/* <Nav style={{opacity: w> 80 ? "1" : "0"}}>
+          <Bar>
+            <Topic>오늘 Top 100</Topic>
+            <TopicPlay>
+              <PlayAll>
+                  <SelectAll>전체재생</SelectAll>
+              </PlayAll>
+              <PlaySelect>
+                  <RanPlay>랜덤재생</RanPlay>
+              </PlaySelect>
+              <More>
+                <MoreDot></MoreDot>
+              </More>
+            </TopicPlay>
+          </Bar>
+        </Nav> */}
+        <SideNav/>
+
         <Container>
           <Content>
             <Title>오늘 Top 100</Title>
@@ -109,23 +130,36 @@ function Chart () {
 
   const Bar = styled.div`
   margin: 13px 38px 13px 43px;
-  width: 100%;
+  max-width: 1170px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   z-index:9999;
 
 `
+const Option = styled.div`
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 225px;
+    z-index: 40;
+    border-bottom: 1px solid #e4e4e4;
+    background-color: #f2f2f2;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.07);
+
+`
+
 
   const Nav = styled.div`
     position: fixed;
+    /* max-width:1270px; */
     top: 0;
     right: 0;
     left: 225px;
     z-index: 30;
     background-color: hsla(0,0%,95.3%,.94);
     padding-left: 7%;
-    padding-right: 10%;
+    /* padding-right: 10%; */
 
 
 `

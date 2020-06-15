@@ -6,141 +6,214 @@ import icon from '../../Images/vibe.png';
 import WinModal from './WinModal';
 import SmallModal from './SmallModal';
 
-
-
-const SelectedList = () => {
-
-  const [ musicState, setMusicState ] = useState([]);
+const SelectedList = (props) => {
+  const [ musicState, setMusicState ] = useState([props]);
   const [ test, setTest ] =useState([]);
   const [ saw, setSaw ] = useState("");
   const [ modalState, setModalState ] = useState(false);
   const [ likeState, setLikeState ] = useState(false);
   const [ toggle, setToggle ] = useState(true);
+  const [cot, setCot]=useState([])
+  // const [ count, setCount ] = useState({
+  //     ct:0,
+  //     dt:[],
+  //     st:false
+  // });
+  //count data check
 
-  useEffect(() => {
-
-    fetch("/jh_data/jh.json")
-    .then((res) => res.json())
-    .then((res) => setMusicState(res.data));
-
-    // setMusicState(
-    //   musicState.map((d) => {
-    //     return{
-    //       id: d.id,
-    //       album: d.album,
-    //       img: d.m_url,
-    //       name: d.name,
-    //       vocal: d.vocal,
-    //       select:false,
-    //     };
-    //   })
-    // );
-    // setMusicState(musicState);
-
-    
-  }, []);
+  // useEffect(() => {
+  //   setMusicState(props)
+  // }, []);
 
   const Cmodal = (id) =>{
-    // console.log("전달받음 id: ",id);
-    const selectModal = [...musicState];
-    // console.log("selectModal: ", selectModal);
-    const i = selectModal.indexOf(id);
-    // console.log(i);
-    const tes = musicState[i] = {...id}
-    // console.log("test:: ", tes);
+    // const selectModal = [...musicState];
+    // const i = selectModal.indexOf(id);
+    // const tes = musicState[i] = {...id}
     setTest({
-      test : tes
+      // test : tes
+      id
     })
     setModalState(!modalState)
-
   }
 
-
   const Lmodal = (id) =>{
-    // console.log("전달받음 id: ",id);
-    const selectModal = [...musicState];
-    // console.log("selectModal: ", selectModal);
-    const i = selectModal.indexOf(id);
-    // console.log(i);
-    const tes = musicState[i] = {...id}
-    // console.log("xxxx ", tes.select);
-    console.log("mn", tes.select);
+    // const selectModal = [...musicState];
+    // const i = selectModal.indexOf(id);
+    // const tes = musicState[i] = {...id}
     setTest({
-      test : tes
-      
+      // test : tes
+      test : id
     })
     setSaw({
-      saw : (!tes.select)
-      
+      saw : (!id.select) 
     })
-    
-
+    // setPosition(
+    //   position
+    // )
     setLikeState(!likeState)
-    
   }
 
   const CloseModal = (close) =>{
     setModalState(!modalState)
   }
+  // const {ct, dt, st} = count
+
+  const AddList = (id) =>{
+    setCot(cot=> [...cot, id])
+  }
 
   const Heart = (like) =>{
     setLikeState(!likeState)
     setToggle(!toggle)
-    
   }
-  
+
+  // const CountChange = e => {
+  //   let checked = e.target.checked
+  //   setMusicState({
+  //     if(props.id==)
+  //   })
+
+  //   setCount({
+  //     ...count,
+  //     st: e.target.checkd,
+  //     ct: ct+1
+  //   })
+  // }
+  // const [choose setChoose]= useState(false);
+  // const CountChange = (event) =>{
+  //   const cat = event.target.checkd;
+  //   console.log("ccc",cat);
+  //   setCount({
+  //     ...count,
+  //     st: (!cat),
+  //     ct: ct+1
+  //   })
+    // console.log("omg",st);
+    // console.log("ooom",ct);
+    
+
+  // }
+
+  // const {ct, dt } = count
+  // const ot = [];
+  // const Scount = (d) =>{
+    
+  //   ot.push(d.id)
+  //   console.log("ohh",d);
+  //   setCount({
+  //     ...count,
+  //     ct: ct+1,
+  //     dt: ot+d.id
+  //   })
+  //   console.log("ac",dt)
+  // }
+
+  // const Sdecount = (d) =>{
+  //   console.log("ohh",d);
+  //   setCount({
+  //     ...count,
+  //     ct: ct-1,
+  //   })
+  // }
+
+  // const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  // useEffect(() => {
+  //   const setFromEvent = e => setPosition({ x: e.clientX, y: e.clientY });
+  //   window.addEventListener("mousemove", setFromEvent);
+
+  //   return () => {
+  //     window.removeEventListener("mousemove", setFromEvent);
+  //   };
+  // }, []);
+
+  // const {x , y} = position;
+  // console.log("pt", x);
+  // console.log("ct",ct);
+  // console.log("mm", st);
   // const Smart = (mart) =>{
   //   setLikeState(!likeState)
   //   setToggle(!toggle)
   // }
   // console.log("zsk",musicState && musicState.select);
+
+  // console.log("po",props&&props.name);
+  // console.log("sddd",musicState);
+  console.log("cot",cot)
+
   return (
-        
-          <Tbody>
-            {musicState.map((d, i) => (
-              <tr key={d.id}>
+          <Tbody>          
+            {/* {props&&props.map((music, i) => ( */}
+              <tr key={props&&props.id}>
                 <OneList>
-                <th scope="row">
-                  <input onChange={event => {
-                    let checked = event.target.checked;
-                    setMusicState(
-                      musicState.map(data => {
-                      if(d.id === data.id) {
-                        data.select = checked;
-                        }
-                        return data;
-                      })
-                    );
-                  }} 
-                    type="checkbox" 
-                    checked={d.select}>                      
-                  </input>
-                </th>
-                <SelectOne>
-                    <img src={d.m_url} style={{width: 40, height: 40}} alt=""/>
-                    <Ta>{d.id}</Ta>
-                    <Td style={{color: "black"}}>{d.name}</Td>
-                    <Tc>{d.vocal}</Tc>
-                    <Tc>{d.album}</Tc>
-                    {/* <Win className={`modalBackground modalShowing-${winState}`}>
-                      <WinModal/>
-                    </Win> */}
-                    {/* <WindowModal onClick={() => WindowModal()}>open</WindowModal> */}
-                    <Tag className={`modalBackground modalShowing-${modalState}`}>
-                      <WinModal CloseModal={CloseModal} test={test}/>
-                    </Tag>
-                    <Tmp3></Tmp3>
-                    <Tmodal onClick={() =>Cmodal(d)} ></Tmodal>
-                    <Lag className={`likeBackground likeShowing-${likeState}`}>
-                      <SmallModal Heart={Heart} test={test} saw={saw} />
-                    </Lag>
-                    { toggle ?
-                    (<Tlike onClick={() => Lmodal(d)} ></Tlike>) 
-                    : <Theart onClick={() => Lmodal(d)}></Theart> }
-                </SelectOne>
+                  <th scope="row">
+                    <input type="checkbox" 
+                      onChange={(event)=>props.CountChange(props.id)}
+                      // onChange={event =>{
+                      //   let checked = event.target.checked;
+                      //   props.select=checked;
+                      //   setMusicState(
+                      //     musicState.map(data => {
+                      //     if(musicState.id === data.id) {
+                      //       data.select = checked;
+                      //       // console.log("ego",data);
+                      //         if(data.select===true){
+                      //           Scount(data);
+                      //           }
+                      //         else Sdecount(data);
+                      //       }
+                      //       return data;
+                      //     })
+                      //   );
+                      // }}
+                    />
+                    {/* {musicState.map((d, i) => (
+                    <input onChange={event => {
+                      let checked = event.target.checked;
+                      setMusicState(
+                        musicState.map(data => {
+                        if(d.id === data.id) {
+                          data.select = checked;
+                          // console.log("ego",data);
+                            if(data.select===true){
+                              Scount(data);
+                              }
+                            else Sdecount(data);
+                          }
+                          return data;
+                        })
+                      );
+                    }} 
+                      type="checkbox">                      
+                    </input> */}
+                  </th>
+                  <SelectOne>
+                      <img src={props && props.img} alt=""/>
+                      <Num>{props && props.id}</Num>
+                      <Name style={{color: "black"}}>{props && props.name}</Name>
+                      <ArtistAlbum>{props && props.artist}</ArtistAlbum>
+                      <ArtistAlbum>{props && props.album}</ArtistAlbum>
+                      <Tag className={`modalBackground modalShowing-${modalState}`}>
+                        <WinModal CloseModal={CloseModal} test={props}/>
+                      </Tag>
+                      <Tmp3></Tmp3>
+                      <Tmodal onClick={()=>Cmodal(props)}></Tmodal>
+                      {/* <Tmodal onClick={() =>Cmodal(props)} ></Tmodal> */}
+                      <ModalWrapper
+                        // x={x} y={y}
+                        className={`likeBackground likeShowing-${likeState}`}
+                        >
+                        <SmallModal 
+                        AddList={AddList}
+                        Heart={Heart} test={props} saw={saw} toggle={toggle}  />
+                      </ModalWrapper>
+                      { toggle ?
+                      (<Tlike onClick={() => Lmodal(props)} ></Tlike>) 
+                      : <Theart onClick={() => Lmodal(props)}></Theart> }
+                  </SelectOne>
                 </OneList>
               </tr>
-            ))}
+            {/* ))} */}
           </Tbody>
         
   );
@@ -148,23 +221,22 @@ const SelectedList = () => {
 
 
 const beforeIcon = css`
-display: block;
-content: "";
-background: url(${icon}) no-repeat;
+  display: block;
+  content: "";
+  background: url(${icon}) no-repeat;
 `;
 
 const afterIcon = css`
-display: inline-block;
-content: "";
-background: url(${icon}) no-repeat;
+  display: inline-block;
+  content: "";
+  background: url(${icon}) no-repeat;
 `;
 
 const Tbody = styled.div`
+  position:relative;
   display: flex;
   flex-direction: column;
   margin-top: 10px;
-  
-
 `
 const OneList = styled.div`
   display: flex;
@@ -174,8 +246,6 @@ const OneList = styled.div`
     background: rgb(228, 228, 228);;
     cursor: pointer;
   }
-
-
 `
 
 const SelectOne = styled.div`
@@ -185,10 +255,13 @@ const SelectOne = styled.div`
     align-items: center;
     justify-content: flex-start;
     margin: 10px;
-
+    img {
+      width: 40px;
+      height: 40px;
+    }
 `
 
-const Ta = styled.div`
+const Num = styled.div`
   width:50px;
   height:100%;
   padding-right: 30px;
@@ -196,7 +269,7 @@ const Ta = styled.div`
 
 `
 
-const Td = styled.div`
+const Name = styled.div`
   width:100%;
   height:100%;
   padding-right: 30px;
@@ -204,7 +277,7 @@ const Td = styled.div`
   font-size:14px;
 
 `
-const Tc = styled.div`
+const ArtistAlbum = styled.div`
   width:70%;
   height:100%;
   padding-right: 30px;
@@ -214,7 +287,6 @@ const Tc = styled.div`
 `
 
 const Tag = styled.div`
- 
   width:100%;
   height:100%;
   padding: 12px 0;
@@ -222,8 +294,6 @@ const Tag = styled.div`
   display:flex;
   text-align: center;
   justify-content: center;
-
-
   &.modalBackground{
     opacity: 0;
     pointer-events: none;
@@ -244,15 +314,12 @@ const Tag = styled.div`
   &.modalShowing-true{
     opacity: 1;
     pointer-events: visible;
-    margin: auto;
+    /* margin: auto; */
   }
 
 `
 
-const Lag = styled.div`
-  
-
-
+const ModalWrapper = styled.div`
   &.likeBackground{
     opacity: 0;
     pointer-events: none;
@@ -273,9 +340,10 @@ const Lag = styled.div`
   &.likeShowing-true{
     opacity: 1;
     pointer-events: visible;
-    margin:right;
+    
+    /* margin-right: ${props=>props.x}px; */
+    /* margin:right; */
   }
-
 `
 const Theart = styled.div`
   &::after {

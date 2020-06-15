@@ -5,51 +5,51 @@ import icon from '../../Images/vibe.png';
 
 
 const SmallModal = (props) => {
-
     const [ oneState, setOneState ] = useState(false);
-    const hi = props.test.test && props.test.test.select;
-
-
+    const [ idList , setIdList ] = useState([]);
     const OverChange = () => {
         setOneState(!oneState);
-
     }
+
+    // const AddList =(id) =>{
+    //     setIdList(
+    //        idList => [...idList, id] 
+           
+    //     );
+
+
+    //     // console.log("oisi",id);
+    //     console.log(idList)
+    // }
     // console.log("hi", props.saw.saw && props.saw.saw);
     // console.log("ediya", props.test.test && props.test.test.select);
-    console.log("likeee?", props.saw.saw && props.saw.saw);
+    // console.log("likeee?", props.saw.saw && props.saw.saw);
+    // console.log("bbr", props.position&&props.position);
+    // console.log("tg",props.toggle);
+    // console.log("xxc",idList)
     return (
-        
         <LikeInner>
            <Title>
             <LikeImage>
-                <img src={props.test.test && props.test.test.m_url}
+                <img src={props.test && props.test.img}
                         style={{width: "40px", height: "40px", marginRight: "12px"}} alt=""/>
                 <ImageTitle>
-                    <Iname>{props.test.test && props.test.test.name}</Iname>
-                    <Ivocal>{props.test.test && props.test.test.vocal}</Ivocal>
+                    <Iname>{props.test && props.test.name}</Iname>
+                    <Ivocal>{props.test && props.test.artist}</Ivocal>
                 </ImageTitle>
             
             </LikeImage>
            </Title>
            <Like>
-               { oneState ? (
+               { props.toggle ? (
                    <Joayo onMouseEnter={() => OverChange()}
                    onClick={() => props.Heart(props.test.test && props.test.test.like)}>좋아요</Joayo>
                 ) :<Joayo onMouseEnter={() => OverChange()}
                 onClick={() => props.Heart(props.test.test && props.test.test.like)}>좋아요 취소</Joayo>
-
                }
-                {/* <Joayo onMouseEnter={() => OverChange()}
-                onClick={() => props.Heart(props.test.test && props.test.test.like)}>좋아요</Joayo> */}
-               
-               {/* { props.test.test && props.test.test.select ?
-                ( <Joayo onClick={() => props.Heart(props.test.test && props.test.test.select)}>좋아요 취소</Joayo>)
-                : <Joayo onClick={() => props.Heart(props.test.test && props.test.test.like)}>좋아요</Joayo>
-               }
-                */}
            </Like>
            <MyList>
-                <span>내 플레이리스트 추가</span>
+                <span onClick={()=>props.AddList(props.test && props.test.id)}>내 플레이리스트 추가</span>
            </MyList>
            <NextList>
                 <span>바로 다음에 추가</span>
@@ -67,10 +67,8 @@ const SmallModal = (props) => {
                 <span>공유</span>
            </Share>
         </LikeInner>
-        
     )
 }
-
 
 const afterIcon = css`
 display: inline-block;
@@ -87,7 +85,7 @@ const LikeInner = styled.div`
     flex-direction: column;
     align-items: flex-start;
     font-size:14px;
-
+    vertical-align: middle;
  `
  const Title = styled.div`
     padding: 5px 20px;

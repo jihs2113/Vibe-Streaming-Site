@@ -6,7 +6,7 @@ import icon from '../../Images/vibe.png';
 
 
 
-const GoChart = () => {
+const GoChart = (props) => {
 
   const [ musicState, setMusicState ] = useState([]);
   const [ test, setTest ] =useState([]);
@@ -16,11 +16,12 @@ const GoChart = () => {
   const [ toggle, setToggle ] = useState(true);
   const [ gokState, setGokState ] = useState(true);
 
-  useEffect(() => {
+ 
+  // useEffect(() => {
 
-    fetch("/jh_data/jh.json")
-    .then((res) => res.json())
-    .then((res) => setMusicState(res.data));
+  //   fetch("/jh_data/jh.json")
+  //   .then((res) => res.json())
+  //   .then((res) => setMusicState(res.data));
 
     // setMusicState(
     //   musicState.map((d) => {
@@ -37,7 +38,7 @@ const GoChart = () => {
     // setMusicState(musicState);
 
     
-  }, []);
+  // }, []);
 
   const Over = () => {
     setGokState(!gokState);
@@ -47,19 +48,21 @@ const GoChart = () => {
   //   setToggle(!toggle)
   // }
 
-  console.log("zsk",saw);
-  console.log("sc",gokState);
+  // console.log("zsk",saw);
+  // console.log("sc",gokState);
   
+
   return (
         
           <Tbody>
-            {musicState.map((d, i) => (
+            
+            {/* {musicState.map((d, i) => ( */}
               
                 <OneList>
                   <SelectOne onMouseEnter={()=> Over()} onMouseLeave={()=> Over()}>
                       <div className="kmk">
                         <img 
-                            src={d.m_url} className="mk" style={{width: 40, height: 40, }} alt=""/>
+                            src={props.img} className="mk" style={{width: 40, height: 40, }} alt=""/>
                       </div>
                       {/* { gokState ?
                         ( <img 
@@ -83,17 +86,17 @@ const GoChart = () => {
                          
                       } */}
                       <Part>
-                        <Ta>{d.id}</Ta>
+                        <Ta>{props.id}</Ta>
                         <Tl>
-                          <Td style={{color: "black"}}>{d.name}</Td>
-                          <Tc>{d.vocal}</Tc>
+                          <Td style={{color: "black"}}>{props.name}</Td>
+                          <Tc>{props.artist}</Tc>
                         </Tl>
                       </Part>
                   </SelectOne>
                 </OneList>
                 
               
-            ))}
+            {/* ))} */}
             
           </Tbody>
         
@@ -118,7 +121,8 @@ const Tbody = styled.div`
   flex-direction: column;
   margin-top: 10px;
   flex-wrap:wrap;
-  width:100%;
+  width:700px;
+  max-width: 1270px;
   
 
 `

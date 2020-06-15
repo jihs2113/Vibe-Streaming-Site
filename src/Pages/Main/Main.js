@@ -59,8 +59,9 @@ function Main () {
 // `
 
 const Body = styled.div`
-    width:100vw;
-    height: 100vh;
+    position: relative;
+    min-height: 100%;
+    overflow-x: hidden;
 
 `
 
@@ -76,7 +77,7 @@ const MainNav = styled.div`
 `
 
 const Container = styled.div`
-            max-width: 1273px;
+           
             position: relative;
             width: 100%;
             height:100vh;
@@ -125,7 +126,7 @@ const Header = styled.div`
 
 const Content = styled.div`
       width:100%;
-      height:400px;
+      height:450px;
       margin: 12px 0 20px 30px;
      
 

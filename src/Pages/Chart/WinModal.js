@@ -18,23 +18,25 @@ const WinModal = (props) => {
     // // const kaka [] = Object.keys(bobo);
     // const [ oneState, setOneState ] = useState([Object.keys(bobo)]);
     // console.log("kaka",oneState);
-
+    // console.log("iran",props);
     return (
         
         <ModalInner>
             <Close onClick={() => props.CloseModal(false)}></Close>
             <ModalImage>
-            <img src={props.test.test && props.test.test.m_url}
+            <img className="Mimg" src={props.test && props.test.img}
                     alt=""/>
             <ModalTitle>
-                <span style={{fontWeight: "600"}}>{props.test.test && props.test.test.name}</span>
-                <span>{props.test.test && props.test.test.vocal}</span>
+                <span style={{fontWeight: "600"}}>{props.test && props.test.name}</span>
+                <span>{props.test && props.test.artist}</span>
             </ModalTitle>
             
             </ModalImage>
         <ModalText>
             <h2>modal header</h2>
-            <span>So are you happy now
+            <span>
+                {props.test && props.test.list}
+                {/* So are you happy now
                 Finally happy now are you
 
                 뭐 그대로야 난 
@@ -72,13 +74,13 @@ const WinModal = (props) => {
                 우리는 오렌지 태양 아래
                 그림자 없이 함께 춤을 춰
                 정해진 안녕 따위는 없어 
-                아름다웠던 그 기억에서 만나 
+                아름다웠던 그 기억에서 만나  */}
             </span>
             <form>
                 <button>Join now~</button>
             </form>
         </ModalText>
-        </ModalInner>
+        </ModalInner>   
         
     )
 }
@@ -92,9 +94,9 @@ background: url(${icon}) no-repeat;
 
 const ModalInner = styled.div`
     width:100%;
-    
     display: flex;
     flex-direction: column;
+    /* vertical-align: middle; */
 
 `
 const Close = styled.div`
@@ -125,6 +127,10 @@ const ModalImage = styled.div`
     display: flex;
     flex-direction: row;
     align-content: space-between;
+    .Mimg{
+        width:80px;
+        height:80px;
+    }
 
 `
 const ModalTitle = styled.div`

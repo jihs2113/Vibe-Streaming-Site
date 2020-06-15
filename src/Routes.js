@@ -11,16 +11,22 @@ import Player from "./Pages/Player/Player"; // jintae - 첫 번째 character 대
 import Pidenav from "./Components/SideNav/SideNav"; // jintae - 첫 번째 character 대문자로 수정
 import MusicDetail from "./Pages/Detail/Music/MusicDetail";
 import Layout from "./Components/Layout/Layout";
+import TopChart from "./Pages/Chart/TopChart";
+import MainChart from "./Pages/Chart/MainChart";
+
 
 class Routes extends Component {
   render() {
     return (
       <Router>
         <GlobalStyle />
+
         <Layout>
           <Switch>
             <Route exact path="/" component={Main} />
             <Route exact path="/Chart" component={Chart} />
+            <Route exact path="/topChart" component={TopChart} />
+            <Route exact path="/MainChart" component={MainChart}/>
             <Route exact path="/library/tracks" component={MypageMusics} />
             <Route exact path="/library/artists" component={MypageArtists} />
             <Route exact path="/library/albums" component={MypageAlbums} />
@@ -31,6 +37,8 @@ class Routes extends Component {
             <Route exact path="/layout" component={Layout}/>
           </Switch>
         </Layout>
+
+     
       </Router>
     );
   }
