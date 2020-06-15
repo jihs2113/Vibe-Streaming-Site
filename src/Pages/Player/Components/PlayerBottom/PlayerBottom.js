@@ -2,9 +2,9 @@ import React, {useEffect, useState, useRef} from 'react';
 import styled, { css } from 'styled-components';
 import icon from '../../../../Images/vibe.png';
 import { connect } from "react-redux";
-import { shuffle, setPopup, setRepeatIndex } from "../../../../store/actions";
+import { shuffle, setPopup, setRepeatIndex, setPlaying } from "../../../../store/actions";
 
-function PlayerBottom ({shuffleIndex,shuffle,popup, setPopup, repeatIndex, setRepeatIndex,songInfo}) {
+function PlayerBottom ({shuffleIndex,shuffle,popup, setPopup, repeatIndex, setRepeatIndex,songInfo, playing, setPlaying}) {
   const id = useRef(null);
   const [curr, setCurr] = useState(false);
   const [hovLike, setHovLike] = useState(false);
@@ -12,9 +12,7 @@ function PlayerBottom ({shuffleIndex,shuffle,popup, setPopup, repeatIndex, setRe
   const [hovMore, setHovMore] = useState(false);
   const [playPoint, setPlayPoint] = useState(0);
   const [playWidth, setPlayWidth] = useState(0);
-  const [playing, setPlaying] = useState(false);
   const [playerWidth, setPlayerWidth] = useState(100);
-  const [audio, setAudio] = useState(null);
   let playerRef = useRef(null);
   const player = new Audio();
 
@@ -66,20 +64,19 @@ function PlayerBottom ({shuffleIndex,shuffle,popup, setPopup, repeatIndex, setRe
   useEffect(()=>{
   
     playerRef.current = player;
-    console.log("updated playerRef",playerRef.current)
   },[player.src]);
   
   useEffect(()=>{
     startPlay();
+    setPlayWidth(0);
+    setPlayPoint(0);
+    console.log("changed song", playing);
   },[songInfo.id]);
 
   const startPlay = () => {
     playerRef.current.src = `http://10.58.0.24:8000/music/stream?music_id=${songInfo.id}`;
-    console.log("this is player", player.src)
     playerRef.current.play();
-    console.log("duration",playerRef.current);
-    console.log("started play");
-    setPlaying(!playing);
+    !playing && setPlaying();
   };
 
   const stopPlay = () => {
@@ -88,8 +85,8 @@ function PlayerBottom ({shuffleIndex,shuffle,popup, setPopup, repeatIndex, setRe
     }else{
       playerRef.current.play();
     }
+    setPlaying();
     console.log("sdfsddafs", playing);
-    setPlaying(!playing);
 
   };
   // const context = new AudioContext();
@@ -161,7 +158,7 @@ function PlayerBottom ({shuffleIndex,shuffle,popup, setPopup, repeatIndex, setRe
         <ShuffleIcon onMouseEnter={()=>setCurr(true)} onMouseLeave={()=>setCurr(false)} shuffleIndex={shuffleIndex} onClick = {()=>shuffle()}/>
         <PlayPrev onMouseEnter={()=>setCurr(true)} onMouseLeave={()=>setCurr(false)}></PlayPrev>
         <PlayButton onMouseEnter={()=>setCurr(true)} onMouseLeave={()=>setCurr(false)} onClick={stopPlay}>
-          <PlaySpan ></PlaySpan>
+          <PlaySpan playing={playing}></PlaySpan>
         </PlayButton>
         <PlayNext onMouseEnter={()=>setCurr(true)} onMouseLeave={()=>setCurr(false)} onClick={()=>startPlay()} ></PlayNext>
         <LoopIcon onMouseEnter={()=>setCurr(true)} onMouseLeave={()=>setCurr(false)} repeatIndex={repeatIndex} onClick = {()=>setRepeatIndex(repeatIndex)} />
@@ -183,11 +180,12 @@ const mapStateToProps = (state) => {
     shuffleIndex: state.shuffleIndex,
     repeatIndex: state.repeatIndex,
     popup: state.popup,
-    songInfo: state.songInfo
+    songInfo: state.songInfo,
+    playing: state.playing
   };
 };
 
-export default connect(mapStateToProps,{ shuffle, setPopup, setRepeatIndex })(PlayerBottom);
+export default connect(mapStateToProps,{ shuffle, setPopup, setRepeatIndex, setPlaying })(PlayerBottom);
 
 const fullIcon = css`
   display: block;
@@ -202,7 +200,8 @@ const PlayerBottomTag = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  z-index:0;
+  z-index:9999;
+  /* z-index:0; */
 `;
 const MusicBarBox = styled.div`
   position: absolute;
@@ -370,7 +369,7 @@ const PlaySpan = styled.span`
   padding-left:5px;
   &::after {
       ${fullIcon};
-      background-position: -597px -128px;
+      background-position: ${props=> props.playing ? "-420px -347px" : "-597px -128px"};
       width: 22px;
       height: 26px;
   }

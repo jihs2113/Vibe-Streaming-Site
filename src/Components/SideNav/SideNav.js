@@ -129,7 +129,7 @@ function SideNav () {
   )
 }
 
-export default withRouter(SideNav);
+export default SideNav;
 
 const SideNavTag = styled.header`
   position: fixed;

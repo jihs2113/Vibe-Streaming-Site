@@ -29,3 +29,9 @@ export const setRepeatIndex = () => {
     type: "REPEAT"
   };
 };
+
+export const setPlaying = () => {
+  return {
+    type: "PLAYING"
+  };
+};

@@ -123,6 +123,7 @@ const PlayerRightTag = styled.div`
   width: 350px;
   background-color: #141414;
   transition: all 1s ease-in-out;
+  z-index:9999;
   @media (max-width: 700px) {
     width: 100%;
   }

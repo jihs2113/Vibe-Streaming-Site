@@ -5,13 +5,13 @@ import PlayerRight from '../PlayerRight/PlayerRight';
 import axios from 'axios';
 
 
-function PlayerTop ({updateShow, show}) {
+function PlayerTop () {
   
   
   return (
    <PlayerTopTag>
-    <PlayerMain show={show} />
-    <PlayerRight show={show} />
+    <PlayerMain />
+    <PlayerRight />
    </PlayerTopTag> 
   )
 };

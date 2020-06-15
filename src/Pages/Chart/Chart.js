@@ -45,7 +45,6 @@ function Chart () {
   const { y } = useScroll();
 
     return ( 
-      
       <>
         <Nav style={{opacity: y> 80 ? "1" : "0"}}>
           <Bar>
@@ -63,7 +62,6 @@ function Chart () {
             </TopicPlay>
           </Bar>
         </Nav>
-        <SideNav/>
         <Container>
           <Content>
             <Title>오늘 Top 100</Title>
@@ -103,8 +101,6 @@ function Chart () {
       </>
      )
   }
-
-
   const beforeIcon = css`
   display: block;
   content: "";
@@ -117,6 +113,7 @@ function Chart () {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  z-index:9999;
 
 `
 
@@ -160,7 +157,7 @@ const Content = styled.div`
       margin-left: 12%;
       margin-top: 5%;
       background-color: white;
-      
+      z-index:9999;
 `
 const Title = styled.div`
       color: black;

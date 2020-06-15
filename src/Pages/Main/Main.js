@@ -8,7 +8,6 @@ import MainChart from '../Chart/MainChart';
 function Main () {
   return (
     <Body>
-            <SideNav/>
             <MainNav>
                 <Container>
                     <Header>
@@ -33,14 +32,14 @@ function Main () {
                         <MainChart/>
                     
                     </Content>
-                    <Content>
+                    {/* <Content>
 
                         <span>asdads</span>
                     </Content>
                     <Content>
 
                         <span>asdads</span>
-                    </Content>
+                    </Content> */}
                 </Container>
             </MainNav>
     </Body>
@@ -71,6 +70,7 @@ const MainNav = styled.div`
         height: 100vh;
         /* margin-left: 10%; */
         background-color: #fbfbfb;
+        padding-left:250px;
 
 
 `
@@ -81,6 +81,7 @@ const Container = styled.div`
             width: 100%;
             height:100vh;
             margin-left: 250px;
+            z-index:9999;
 
 `
 const Header = styled.div`

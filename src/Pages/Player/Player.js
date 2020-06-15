@@ -6,20 +6,15 @@ import url from "./background.PNG";
 
 
 function Player () {
-  const [show, setShow] = useState(true);
-
-  const updateShow = () => {
-    setShow(!show);
-  }
   return (
     <PlayerTag>
-      <PlayerTop updateShow={updateShow} show = {show} />
-      <PlayerBottom updateShow={updateShow} />
+      <PlayerTop />
+      <PlayerBottom />
     </PlayerTag>
   )
 };
 
-
+export default Player;
 
 
 const PlayerTag = styled.div`
@@ -28,5 +23,5 @@ const PlayerTag = styled.div`
   top:0;
   bottom:0;
   overflow:hidden;
-  z-index:9999;
+  
 `;

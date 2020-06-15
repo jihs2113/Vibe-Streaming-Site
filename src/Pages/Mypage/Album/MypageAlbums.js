@@ -5,7 +5,6 @@ import SideNav from '../../../Components/SideNav/SideNav';
 function MypageAlbums () {
   return (
     <MypageAlbumTag>
-      <SideNav />
       <Container>
         <Content>
           <TitleWrap>

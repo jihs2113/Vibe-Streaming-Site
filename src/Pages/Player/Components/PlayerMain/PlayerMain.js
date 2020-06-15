@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from "react-redux";
 import { setPopup } from '../../../../store/actions';
 
-function PlayerMain ({show, mainImg, songInfo, setPopup, popup}) {
+function PlayerMain ({songInfo, setPopup, popup}) {
   
   const [curr, setCurr] = useState(false);
   
@@ -36,7 +36,7 @@ const PlayerMainTag = styled.div`
   justify-content: center;
   align-items: center;
   transition: all 1s ease-in-out;
-  
+  z-index:9999;
 `
 
 const MainImg = styled.img`
