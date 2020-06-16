@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import SideNav from '../../../Components/SideNav/SideNav';
 import MypageExistArtist from './MypageExistArtist';
 
 function MypageArtists () {
@@ -25,34 +24,30 @@ function MypageArtists () {
 
   return (
     <MypageArtistTag>
-      <Container>
-        <Content>
-          <TitleWrap>
-            <TitleBox>
-              <Title>보관함</Title>
-              <AreaSubTit>아티스트</AreaSubTit>
-            </TitleBox>
-          </TitleWrap>
-          {
-            artistArray.length > 0 && artistArray ?
-            (
-              <MypageExistArtist 
-                stateLike={stateLike} 
-                onRemove={onRemove} 
-                artistArray={artistArray} 
-              />
-             
-            ) : (
-              <Inner>
-                <InnerArea>
-                  <AreaTit>좋아하는 아티스트</AreaTit>
-                  <SubTit>내가 좋아하는 아티스트를 보관함에서 확인해보세요.</SubTit>
-                </InnerArea>
-              </Inner>   
-            )
-          }
-        </Content>
-      </Container>
+      <TitleWrap>
+        <TitleBox>
+          <Title>보관함</Title>
+          <AreaSubTit>아티스트</AreaSubTit>
+        </TitleBox>
+      </TitleWrap>
+      {
+        artistArray.length > 0 && artistArray ?
+        (
+          <MypageExistArtist 
+            stateLike={stateLike} 
+            onRemove={onRemove} 
+            artistArray={artistArray} 
+          />
+          
+        ) : (
+          <Inner>
+            <InnerArea>
+              <AreaTit>좋아하는 아티스트</AreaTit>
+              <SubTit>내가 좋아하는 아티스트를 보관함에서 확인해보세요.</SubTit>
+            </InnerArea>
+          </Inner>   
+        )
+      }
     </MypageArtistTag>
   )
 };
@@ -60,24 +55,7 @@ function MypageArtists () {
 export default MypageArtists;
 
 const MypageArtistTag = styled.div`
-  height: 100vh;
-`;
-
-const Container = styled.div`
   height: 100%;
-  padding-left: 250px;
-  background: ${props=> props.theme.color.white};
-
-`;
-
-const Content = styled.div`
-  position: absolute;
-  top: 0;
-  left: 250px;
-  right: 0;
-  height: 100%;
-  width: 964px;
-  margin: 0 auto;
 `;
 
 const TitleWrap = styled.h2`

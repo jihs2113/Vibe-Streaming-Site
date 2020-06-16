@@ -24,13 +24,13 @@
     "playlist" : [
         {
             "playlist_id" : 1,
-            "playlist_name" : "FeelTheVibe",
-            "playlist_number" : 3
+            "name" : "FeelTheVibe",
+            "qauntity" : 3
         },
         {
             "playlist_id" : 2,
-            "playlist_name" : "naverVibe",
-            "playlist_number" : 1
+            "name" : "naverVibe",
+            "qauntity" : 1
         }
     ]
     
