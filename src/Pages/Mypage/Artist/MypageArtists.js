@@ -25,7 +25,6 @@ function MypageArtists () {
 
   return (
     <MypageArtistTag>
-      <SideNav />
       <Container>
         <Content>
           <TitleWrap>

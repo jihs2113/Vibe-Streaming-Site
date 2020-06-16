@@ -6,7 +6,6 @@ import icon from '../../../Images/vibe.png';
 function MypageMusic () {
   return (
     <MypageMusicTag>
-      <SideNav />
       <Container>
         <Content>
           <TitleWrap>
