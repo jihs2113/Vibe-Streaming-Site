@@ -8,7 +8,7 @@ function TopChart () {
   const [ musicState, setMusicState ] = useState([]);
   const [snt, setSnt] = useState([]);
   useEffect(() => {
-    fetch("http://10.58.1.88:8000/music/chart")
+    fetch("http://10.58.6.19:8000/music/chart")
     .then((res) => res.json())
     .then((res) => setMusicState(res.data));
     // setMusicState(

@@ -1,8 +1,9 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import styled from 'styled-components';
-import SideNav from '../../Components/SideNav/SideNav';
 import MainChart from '../Chart/MainChart';
+import LoadingChart from '../Chart/LoadingChart';
+import VideoChart from '../Chart/VideoChart';
 
 
 function Main () {
@@ -30,6 +31,14 @@ function Main () {
                      </Header>
                     <Content>
                         <MainChart/>
+                    
+                    </Content>
+                    <Content>
+                        <LoadingChart/>
+                    
+                    </Content>
+                    <Content>
+                        <VideoChart/>
                     
                     </Content>
                     {/* <Content>
@@ -68,10 +77,10 @@ const Body = styled.div`
 const MainNav = styled.div`
         padding-bottom: 467px;
         width:100%;
-        height: 100vh;
+        height: 100%;
         /* margin-left: 10%; */
         background-color: #fbfbfb;
-        padding-left:250px;
+        /* padding-left:250px; */
 
 
 `
@@ -80,8 +89,8 @@ const Container = styled.div`
            
             position: relative;
             width: 100%;
-            height:100vh;
-            margin-left: 250px;
+            height:100%;
+            /* margin-left: 250px; */
             z-index:9999;
 
 `
@@ -127,7 +136,7 @@ const Header = styled.div`
 const Content = styled.div`
       width:100%;
       height:450px;
-      margin: 12px 0 20px 30px;
+      margin: 12px 0 20px 0;
      
 
 `

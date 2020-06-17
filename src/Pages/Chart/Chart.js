@@ -63,7 +63,35 @@ function Chart () {
         </Nav>
 
         <Option>
-              <span>sd</span>
+          <div className="AddNav">
+            <div className="SelectBtn">
+                <div className="Abtn">
+                  <input type="checkbox"/>
+                  <span>전체선택</span>
+                  <span style={{fontWeight:600, color:"#ff1150"}}>2곡 선택</span>
+                </div>
+                <div className="CloseBtn"></div>
+            </div>
+            <div className="ManyBtn">
+                <div className="BtnWrap">
+                    <span className="Next">
+                      바로 다음에 추가
+                    </span>
+                    <span className="Bottom">
+                      맨 아래에 추가
+                    </span>
+                    <span className="MyAdd">
+                      내 플레이리스트 추가
+                    </span>
+                    <span className="Buy">
+                      MP3 구매
+                    </span>
+                </div>
+                <button className="SelectPly">
+                    <span className="PlyBtn">선택한 곡 재생</span>
+                </button>
+            </div>
+          </div>
         </Option>
         {/* <Nav style={{opacity: w> 80 ? "1" : "0"}}>
           <Bar>
@@ -81,7 +109,7 @@ function Chart () {
             </TopicPlay>
           </Bar>
         </Nav> */}
-        <SideNav/>
+        {/* <SideNav/> */}
 
         <Container>
           <Content>
@@ -128,6 +156,12 @@ function Chart () {
   background: url(${icon}) no-repeat;
   `;
 
+  const afterIcon = css`
+  display: inline-block;
+  content: "";
+  background: url(${icon}) no-repeat;
+  `;
+
   const Bar = styled.div`
   margin: 13px 38px 13px 43px;
   max-width: 1170px;
@@ -141,11 +175,181 @@ const Option = styled.div`
     position: fixed;
     top: 0;
     right: 0;
-    left: 225px;
-    z-index: 40;
+    left: 250px;
+    z-index: 99999;
     border-bottom: 1px solid #e4e4e4;
     background-color: #f2f2f2;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.07);
+    .AddNav{
+      position: relative;
+      width: 964px;
+      margin: 0 auto;
+      .SelectBtn{
+        display:flex;
+        justify-content:space-between;
+      
+      .Abtn{
+        padding: 19px 0 20px;
+        border-bottom: 1px solid #e4e4e4;
+        display:flex;
+        flex-direction:row;
+        input{
+          width: 16px;
+          height: 16px;
+          display: inline-block;
+          margin-right: 6px;
+          vertical-align: middle;
+        }
+        span{
+          display: inline-block;
+          padding-right: 10px;
+          font-size: 15px;
+          line-height: 18px;
+          color: #232323;
+          vertical-align: middle;
+        }
+      }
+        .CloseBtn{
+          display: flex;
+          justify-content: flex-end;
+          padding-top:10px;
+          padding-right: 2%;
+          cursor: pointer;
+          &::after {
+            ${afterIcon}
+            top: 30px;
+            bottom: 0;
+            left: 46px;
+            width: 14px;
+            height: 14px;
+            margin-top: 10px;
+            background-position: -387px -661px;
+            transition: height 0.5s ease-in,opacity 0.5s ease-in;
+            /* background-color:white; */
+          }
+        }
+      
+    }
+      .ManyBtn{
+        position: relative;
+        margin-left: -10px;
+        padding: 13px 0 12px;
+        display:flex;
+        flex-direction:row;
+        justify-content:space-between;
+        .BtnWrap{
+          display:flex;
+          flex-direction:row;
+          .Next{
+            cursor: pointer;
+            display: flex;
+            margin: 2px;
+            padding: 10px 8px 9px;
+            font-size: 14px;
+            line-height: 17px;
+            color: #232323;
+            vertical-align: top;
+            &::before {
+            ${beforeIcon}
+            top: 30px;
+            bottom: 0;
+            left: 46px;
+            background-position: -371px -439px;
+            width: 16px;
+            height: 16px;
+            transition: height 0.5s ease-in,opacity 0.5s ease-in;
+          }
+            }
+            .Bottom{
+              cursor: pointer;
+              display: flex;
+              margin: 2px;
+              padding: 10px 8px 9px;
+              font-size: 14px;
+              line-height: 17px;
+              color: #232323;
+              vertical-align: top;
+              &::before {
+              ${beforeIcon}
+              top: 30px;
+              bottom: 0;
+              left: 46px;
+              background-position: -718px -554px;
+              width: 16px;
+              height: 16px;
+              transition: height 0.5s ease-in,opacity 0.5s ease-in;
+            }
+            }
+            .MyAdd{
+              cursor: pointer;
+              display: flex;
+              margin: 2px;
+              padding: 10px 8px 9px;
+              font-size: 14px;
+              line-height: 17px;
+              color: #232323;
+              vertical-align: top;
+              &::before {
+              ${beforeIcon}
+              top: 30px;
+              bottom: 0;
+              left: 46px;
+              background-position: -419px -439px;
+              width: 16px;
+              height: 16px;
+              transition: height 0.5s ease-in,opacity 0.5s ease-in;
+            }
+            }
+            .Buy{
+              cursor: pointer;
+              display: flex;
+              margin: 2px;
+              padding: 10px 8px 9px;
+              font-size: 14px;
+              line-height: 17px;
+              color: #232323;
+              vertical-align: top;
+              &::before {
+              ${beforeIcon}
+              top: 30px;
+              bottom: 0;
+              left: 46px;
+              background-position: -281px -439px;
+              width: 24px;
+              height: 16px;
+              transition: height 0.5s ease-in,opacity 0.5s ease-in;
+            }
+            }
+          }
+        }
+        .SelectPly{
+          width: 140px;
+          background-color: #ff1150;
+          border: 1px solid #ff1150;
+          border-radius: 4px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          padding-left: 5px;
+          .PlyBtn{
+            color: #fff;
+            font-size: 15px;
+            font-weight: 400;
+            display:flex;
+            &::before {
+                ${beforeIcon}
+                top: 30px;
+                bottom: 0;
+                left: 46px;
+                width: 19px;
+                height: 20px;
+                background-position: -592px -689px;
+                transition: height 0.5s ease-in,opacity 0.5s ease-in;
+              }
+          }
+        }
+      }
+    }
 
 `
 
@@ -179,7 +383,7 @@ const Option = styled.div`
 const Container = styled.div`
   padding-bottom: 467px;
   height: 100vh;
-  padding-left: 225px;
+  /* padding-left: 225px; */
   background-color: white;
 
 `
@@ -188,7 +392,7 @@ const Content = styled.div`
       max-width: 1273px;
       position: relative;
       width: 964px;
-      margin-left: 12%;
+      /* margin-left: 12%; */
       margin-top: 5%;
       background-color: white;
       z-index:9999;

@@ -196,7 +196,7 @@ const fullIcon = css`
 const PlayerBottomTag = styled.div`
   background-color: rgba(25,25,25,.97);
   height: 81px;
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   left: 0;

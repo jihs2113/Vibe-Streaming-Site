@@ -8,7 +8,7 @@ import GoChart from './GoChart';
 
 
 
-function MainChart(props) {
+function LoadingChart(props) {
 
     const [linkState, setLinkState] = useState([]);
     const [ slideState, setSlideState ] = useState(0);
@@ -57,7 +57,7 @@ function MainChart(props) {
                     <button className="left" onClick={()=>Pleft()}></button>
                     <button id="right" onClick={()=>Pright()}></button>
                     <h3 style={{display: "flex", alignItems: "flex-start" }}>
-                        <GoList onClick={()=>HandleLink()}>오늘 Top 100</GoList>
+                        <GoList onClick={()=>HandleLink()}>국내 급 상승</GoList>
                     </h3>
                     <Camp slideState={slideState}>
                       
@@ -224,4 +224,4 @@ const Camp = styled.div`
 `
 
 
-export default withRouter(MainChart);
+export default withRouter(LoadingChart);

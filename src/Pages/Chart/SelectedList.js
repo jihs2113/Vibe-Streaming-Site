@@ -67,6 +67,9 @@ const SelectedList = (props) => {
     setToggle(!toggle)
   }
 
+  const HandleLink = (id) =>{
+    props.history.push(`/track/${id}`);
+  }
   // const CountChange = e => {
   //   let checked = e.target.checked
   //   setMusicState({
@@ -190,7 +193,8 @@ const SelectedList = (props) => {
                   <SelectOne>
                       <img src={props && props.img} alt=""/>
                       <Num>{props && props.id}</Num>
-                      <Name style={{color: "black"}}>{props && props.name}</Name>
+                      <Name onClick={()=>HandleLink(props.id)}
+                        style={{color: "black"}}>{props && props.name}</Name>
                       <ArtistAlbum>{props && props.artist}</ArtistAlbum>
                       <ArtistAlbum>{props && props.album}</ArtistAlbum>
                       <Tag className={`modalBackground modalShowing-${modalState}`}>

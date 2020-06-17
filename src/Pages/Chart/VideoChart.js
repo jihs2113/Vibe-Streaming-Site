@@ -3,28 +3,29 @@ import {withRouter} from 'react-router-dom';
 import styled, {css} from 'styled-components';
 import icon from '../../Images/vibe.png';
 // import SideNav from '../../Components/SideNav/SideNav';
-import GoChart from './GoChart';
+import GoVideo from './GoVideo';
 
 
 
 
-function MainChart(props) {
+function VideoChart() {
 
-    const [linkState, setLinkState] = useState([]);
+    const [ linkState, setLinkState] = useState([]);
     const [ slideState, setSlideState ] = useState(0);
-    const [musicState, setMusicState ] = useState([]);
+    const [ musicState, setMusicState ] = useState([]);
+    const [ videoState, setVideoState ] = useState([]);
 
     useEffect(() => {
-        fetch("http://10.58.6.19:8000/music/chart")
+        fetch("/jh_data/jh.json")
         .then((res) => res.json())
-        .then((res) => setMusicState(res.data));
+        .then((res) => setVideoState(res.data));
 
 
     }, []);
 
-    const HandleLink = () =>{
-        props.history.push("Chart");
-    }
+    // const HandleLink = () =>{
+    //     props.history.push("Chart");
+    // }
 
     
 
@@ -44,7 +45,7 @@ function MainChart(props) {
       
   
     }
-    console.log("count",slideState);
+    console.log("count",videoState);
 
     return (
         <>
@@ -57,19 +58,17 @@ function MainChart(props) {
                     <button className="left" onClick={()=>Pleft()}></button>
                     <button id="right" onClick={()=>Pright()}></button>
                     <h3 style={{display: "flex", alignItems: "flex-start" }}>
-                        <GoList onClick={()=>HandleLink()}>오늘 Top 100</GoList>
+                        <GoList>뮤직 비디오 Top 50</GoList>
                     </h3>
                     <Camp slideState={slideState}>
                       
-                        {musicState.map((music, i)=>(
-                            <GoChart
+                        {videoState.map((music, i)=>(
+                            <GoVideo
                                 id={music.id}
-                                img={music.image_url}
+                                img={music.m_url}
                                 name={music.name}
-                                artist={music.artist}
-                                album={music.album}
-                                list={music.lyrics}
-                                select={music.select}
+                                vocal={music.vocal}
+                              
                             />
                         ))}
                         
@@ -224,4 +223,4 @@ const Camp = styled.div`
 `
 
 
-export default withRouter(MainChart);
+export default withRouter(VideoChart);
