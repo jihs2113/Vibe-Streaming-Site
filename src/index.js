@@ -17,8 +17,6 @@ ReactDOM.render(
     <Provider store={store}>
     <ThemeProvider theme={Common} >
         <Routes />
-        <SideNav />
-        <Player />
     </ThemeProvider>
     </Provider>
    , 

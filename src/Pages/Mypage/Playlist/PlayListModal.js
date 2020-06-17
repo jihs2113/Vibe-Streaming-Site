@@ -20,12 +20,13 @@ function PlayListModal({ visible, isCloseModal }) {
 
     const playListRegister = () => {
         console.log("value: ", inputs);
-      
-        fetch(``, {
+        const token = localStorage.getItem("access_token");
+        console.log("tokenModal: ",token);
+        fetch("http://10.58.2.47:8000/music/myplaylist", {
             method: "POST",
             headers : {
                 "Content-type" : "application/json",
-                "Authorization" : "token"
+                "Authorization" : token
             },
             body : JSON.stringify({
                 name : inputs
@@ -36,10 +37,12 @@ function PlayListModal({ visible, isCloseModal }) {
         .catch(err => console.log("err : ", err));
         setInputs("");
         isCloseModal();
+        window.location.reload();
     }
 
     useEffect(() => {
         if(inputs.length === 0) {
+            console.log("0")
             setIsButton(false);
         }else if(inputs.length > 0)  {
             setIsButton(true);

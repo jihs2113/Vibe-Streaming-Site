@@ -6,8 +6,6 @@ import icon from '../../../Images/vibe.png';
 function MypageMusic () {
   return (
     <MypageMusicTag>
-      <Container>
-        <Content>
           <TitleWrap>
             <TitleBox>
               <div className="titleDefault">
@@ -38,8 +36,6 @@ function MypageMusic () {
               <SubTit>내가 좋아하는 노래들을 모아서 감상해보세요.</SubTit>
             </InnerArea>
           </Inner>
-        </Content>
-      </Container>
     </MypageMusicTag>
   )
 }
@@ -47,24 +43,7 @@ function MypageMusic () {
 export default MypageMusic;
 
 const MypageMusicTag = styled.div`
-  height: 100vh;
-`;
-
-const Container = styled.div`
   height: 100%;
-  padding-left: 250px;
-  background: ${props=> props.theme.color.white};
-
-`;
-
-const Content = styled.div`
-  position: absolute;
-  top: 0;
-  left: 250px;
-  right: 0;
-  height: 100%;
-  width: 964px;
-  margin: 0 auto;
 `;
 
 const TitleWrap = styled.h2`

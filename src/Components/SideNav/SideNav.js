@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import SearchInput from './SearchInput';
 import NavMenu from './NavMenu';
 import ExtreMenu from './ExtraMenu';
@@ -16,12 +16,17 @@ function SideNav () {
     image: ""
   });
 
+
+
   const onSearchInput = () => {
     setIsSearch(!isSearch);
   }
-
+  let history = useHistory();
   const onLogout = () => {
     console.log("logout click");
+    window.localStorage.clear();
+    history.push('/');
+    window.location.reload();
   }
 
   const onProfile = () => {
@@ -36,29 +41,28 @@ function SideNav () {
   useEffect(Login, []);
 
   const Naver = () => {
-    console.log("login")
     const naverLogin = new naver.LoginWithNaverId({
-      clientId: "QDZr1WLm6VcmphMlX2FT",
-      callbackUrl: "http://localhost:3000/sidenav",
+      clientId: "rHi1ugFEJ65Wm4GmHNae",
+      callbackUrl: "http://localhost:3000/",
       isPopup: false,
       loginButton: {color: "green", type: 1, height: 30} ,
       callbackHandle: true
     });
     naverLogin.init();
 
-    naverLogin.getLoginStatus(function (status) {
-      if (status) {
-        console.log("status: ", status)
-        let profileImage = naverLogin.user.getProfileImage();
-        let id = naverLogin.user.getId();
-        var email = naverLogin.user.getEmail();
-        console.log("profileImage: ", profileImage);
-        console.log("id: ", id);
-        console.log("email: ", email);
-      } else {
-        console.log("AccessToken이 올바르지 않습니다.");
-      }
-    });
+    // naverLogin.getLoginStatus(function (status) {
+    //   if (status) {
+    //     console.log("status: ", status)
+    //     let profileImage = naverLogin.user.getProfileImage();
+    //     let id = naverLogin.user.getId();
+    //     var email = naverLogin.user.getEmail();
+    //     console.log("profileImage: ", profileImage);
+    //     console.log("id: ", id);
+    //     console.log("email: ", email);
+    //   } else {
+    //     console.log("AccessToken이 올바르지 않습니다.");
+    //   }
+    // });
   }
 
   const GetProfile = () => {
@@ -67,19 +71,25 @@ function SideNav () {
       const location = window.location.href.split('=')[1];
       const token = location.split('&')[0];
       console.log("token: ", token);
-      fetch("http://10.58.6.130:8000/account/sign" , {
-        method: "POST",
+      fetch("http://10.58.2.47:8000/account/sign-in" , {
+        method: "GET",
         headers : {
           "Content-type" : "application/json",
           "Authorization": token
         },
       })
       .then(res => res.json())
-      .then(res => console.log("Res: ", res))
-      .catch(err => console.log("res : ", err));
+      .then(res => {
+        localStorage.setItem("access_token", res.token);
+        setUserData({
+          nickname : res.name,
+          image : res.image
+        })
+      })
+      .catch(err => console.log("err : ", err));
     }
-  }
-
+  };
+  
   return (
     <SideNavTag>
       <SideNavInner>
@@ -91,36 +101,36 @@ function SideNav () {
           />
         </SideH1>
         <Container>
-          <SideLogin className="login">
-            <UserInfo>
-              <SideText>로그인</SideText>  
-            </UserInfo>
-            <LoginLink onClick={Login} id="naverIdLogin" /> 
-          </SideLogin>
-
-        {/* login 시 */}
-
-        <SideLogin className="login" onClick={onProfile}>
-          <UserLoginInfo images={userData.image}>
-            <SideText>{userData.nickname}</SideText>
-          </UserLoginInfo>
-          <ProfileBox isProfile={isProfile}>
-            <ProfileBtn type="button">
-              <span>My 멤버십</span>
-            </ProfileBtn>
-            <ProfileBtn type="button">
-              <span>공지사항</span>
-            </ProfileBtn>
-            <ProfileBtn type="button">
-              <span>계정설정</span>
-            </ProfileBtn>
-            <ProfileBtn type="button" onClick={onLogout}>
-              <span>로그아웃</span>
-            </ProfileBtn>
-          </ProfileBox> 
-        </SideLogin>
-
-        {/* login 시*/}
+          {
+             userData.image ? (
+              <SideLogin className="login" onClick={onProfile}>
+                <UserLoginInfo images={userData.image}>
+                  <SideText>{userData.nickname}</SideText>
+                </UserLoginInfo>
+                <ProfileBox isProfile={isProfile}>
+                  <ProfileBtn type="button">
+                    <span>My 멤버십</span>
+                  </ProfileBtn>
+                  <ProfileBtn type="button">
+                    <span>공지사항</span>
+                  </ProfileBtn>
+                  <ProfileBtn type="button">
+                    <span>계정설정</span>
+                  </ProfileBtn>
+                  <ProfileBtn type="button" onClick={onLogout}>
+                    <span>로그아웃</span>
+                  </ProfileBtn>
+                </ProfileBox> 
+              </SideLogin>
+            ) : (
+              <SideLogin className="login">
+                <UserInfo>
+                  <SideText>로그인</SideText>  
+                </UserInfo>
+                <LoginLink onClick={Login} id="naverIdLogin" /> 
+              </SideLogin>
+            )
+          }
           <NavMenu />
           <ExtreMenu/>
         </Container>

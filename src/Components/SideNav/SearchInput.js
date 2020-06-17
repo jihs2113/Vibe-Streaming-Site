@@ -83,7 +83,7 @@ const SearchInputTag = styled.div`
     height: ${(props)=> props.showInput ? "82px": "0px"};
     z-index: 100;
     border-bottom: 1px solid rgba(0,0,0,.1);
-    transition: height 0.3s ease-in,opacity 0.3s ease-in;
+    transition: ${props => props.showInput ? "height .2s ease-in,opacity .2s ease-in" : "height .1s ease-in,opacity .1s ease-in"};
     background: #fff;
     opacity:${(props)=> props.showInput ? 1: 0};
     &::before {
@@ -95,15 +95,16 @@ const SearchInputTag = styled.div`
       width: 20px;
       height: 20px;
       background-position: -688px -558px;
-      transition: height 0.5s ease-in,opacity 0.5s ease-in;
+    transition: ${props => props.showInput ? "height 0.3s ease-in,opacity 0.3s ease-in" : " opacity 0s ease-in"}
+     
     }
 `;
 
 const InputArea = styled.div`
     display: flex;
     align-items: center;
-    height: 100%;
-    transition: opacity .1s ease-in .2s;
+    height:  100%;
+    transition: ${props => props.showInput ? "transition: opacity 0s ease-in": "opacity .1s ease-in .2s"};
     padding: 0 30px;
 `;
 

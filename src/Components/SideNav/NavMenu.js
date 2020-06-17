@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import {setNavList} from '../../store/actions/index';
+import { useHistory } from 'react-router-dom';
+import { setNavList } from '../../store/actions/index';
 import { connect } from "react-redux";
 import icon from '../../Images/vibe.png';
 
@@ -14,13 +15,13 @@ function NavMenu({ setNavList, navList }) {
         id: 1,
         title: "투데이",
         clazzName: "todayLink",
-        hrefs: "#",
+        hrefs: "/",
       },
       {
         id: 2,
         title: "차트",
         clazzName: "chartLink",
-        hrefs: "#"
+        hrefs: "/Chart"
       },
       {
         id: 3,
@@ -32,23 +33,27 @@ function NavMenu({ setNavList, navList }) {
 
     const lokerTitle = [
       {
-        id: 1,
+        id: 4,
         title: "노래",
+        clazzName: "tracks",
         hrefs: "/library/tracks"
       },
       {
-        id: 2,
+        id: 5,
         title: "플레이리스트",
+        clazzName: "playlists",
         hrefs: "/library/playlists"
       },
       {
-        id: 3,
+        id: 6,
         title: "아티스트",
+        clazzName: "artists",
         hrefs: "/library/artists"
       },
       {
-        id: 4,
+        id: 7,
         title: "앨범",
+        clazzName: "albums",
         hrefs: "/library/albums"
       }
     ];
@@ -65,6 +70,9 @@ function NavMenu({ setNavList, navList }) {
       setStateLoker(lokerTitle);
     }, []);
 
+    let history = useHistory();
+    const token = localStorage.getItem("access_token");
+    
     return (
         <NavMenuTag>
           <NavBox>
@@ -73,8 +81,8 @@ function NavMenu({ setNavList, navList }) {
                   stateList && stateList.map((list, index) => {
                     return (
                       <NavList key={list.id}>
-                        <ListLink className={list.clazzName} href={list.hrefs} navList={navList} onClick={() => onIsActive(list.id)}>
-                          <SideText className={list.clazzName} navList={navList} >{list.title}</SideText>
+                        <ListLink className={list.clazzName} navList={navList} onClick={() => onIsActive(list.id)}>
+                          <SideText className={list.clazzName} navList={navList} onClick={() => history.push(`${list.hrefs}`)}>{list.title}</SideText>
                         </ListLink>
                       </NavList>
                     );
@@ -83,22 +91,27 @@ function NavMenu({ setNavList, navList }) {
             </NavUl>
           </NavBox>
           {/* login되면 나타나는 nav */}
-          <NavBox>
-            <LokerTit>보관함</LokerTit>
-            <NavUl>
-                {
-                  stateLoker && stateLoker.map(loker => {
-                    return (
-                      <NavList key={loker.id}>
-                        <ListLink href={loker.hrefs}>
-                            <LokerText>{loker.title}</LokerText>
-                        </ListLink>
-                      </NavList>
-                    );
-                  })
-                }
-            </NavUl>
-          </NavBox>
+          {
+            token ? (
+              <NavBox>
+                  <LokerTit>보관함</LokerTit>
+                  <NavUl>
+                      {
+                        stateLoker && stateLoker.map(list => {
+                          return (
+                            <NavList key={list.id}>
+                              <ListLink  navList={navList} onClick={() => onIsActive(list.id)}>
+                                  <LokerText className={list.clazzName} navList={navList} onClick={() => history.push(`${list.hrefs}`)}>{list.title}</LokerText>
+                              </ListLink>
+                            </NavList>
+                          );
+                        })
+                      }
+                  </NavUl>
+                </NavBox>   
+            ) : null
+          }
+          
           {/* login되면 나타나는 nav */}
         </NavMenuTag>
     );
@@ -139,10 +152,11 @@ const beforeIcon = css`
   background: url(${icon}) no-repeat;
 `;
 
-const ListLink = styled.a`
+const ListLink = styled.button`
   display: flex;
   align-items: center;
   height: 100%;
+  background: none;
   
   &.todayLink::before {
     ${beforeIcon}
@@ -193,6 +207,17 @@ const LokerText = styled.span`
   margin: 0;
   font-size: 17px;
   line-height: 1.4;
-  color: ${props => props.theme.color.white};
+  &.tracks {
+    color: ${props => !(props.navList === 4) ? props.theme.color.white : props.theme.color.mainColor};
+  }
+  &.playlists {
+    color: ${props => !(props.navList === 5) ? props.theme.color.white : props.theme.color.mainColor};
+  }
+  &.artists {
+    color: ${props => !(props.navList === 6) ? props.theme.color.white : props.theme.color.mainColor};
+  }
+  &.albums {
+    color: ${props => !(props.navList === 7) ? props.theme.color.white : props.theme.color.mainColor};
+  }
   
 `;

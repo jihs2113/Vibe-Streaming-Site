@@ -1,10 +1,10 @@
-
 export const setNavList = (list) => {
     return {
         type: "NAV_ACTIVE",
         payload: list
     }
 }
+
 export const shuffle = () => {
   return {
     type: "SHUFFLE"
@@ -35,3 +35,11 @@ export const setPlaying = () => {
     type: "PLAYING"
   };
 };
+
+export const setAddPlaylist = (playlist) => {
+    return {
+        type: "ADD_PLAYLIST",
+        payload: playlist
+    }
+}
+
