@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import MypageExistArtist from './MypageExistArtist';
 
 function MypageArtists () {
-  const [ stateLike, setStateLike ] = useState(true);
+  const stateLike = true;
   const [ artistArray, setArtistArray ] = useState([]);
 
   const onRemove = (artist) => {
-    console.log("onRemove: ", artist);
     const selectArtist = [...artistArray];
     const i = selectArtist.indexOf(artist);
     artistArray[i] ={...artist};

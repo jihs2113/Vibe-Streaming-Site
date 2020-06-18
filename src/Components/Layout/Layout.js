@@ -34,11 +34,9 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  position: absolute;
   top: 0;
   left: 250px;
   right: 0;
-
   background: #fbfbfb;
   @media(max-width: 768px) {
     width: 100%;

@@ -8,7 +8,6 @@ import icon from '../../Images/vibe.png';
 function NavMenu({ setNavList, navList }) {
     const [ stateList, setStateList ] = useState([]);
     const [ stateLoker, setStateLoker ] = useState([]);
-    // const [ isActive, setIsActive ] = useState(false);
     
     const listTitle = [
       {
@@ -78,7 +77,7 @@ function NavMenu({ setNavList, navList }) {
           <NavBox>
             <NavUl>
                 {
-                  stateList && stateList.map((list, index) => {
+                  stateList && stateList.map((list) => {
                     return (
                       <NavList key={list.id}>
                         <ListLink className={list.clazzName} navList={navList} onClick={() => onIsActive(list.id)}>

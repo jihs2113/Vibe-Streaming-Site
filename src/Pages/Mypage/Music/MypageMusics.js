@@ -1,9 +1,70 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled,{ css } from 'styled-components';
-import SideNav from '../../../Components/SideNav/SideNav';
+import SelectedList from '../../Chart/SelectedList';
+import { API } from '../../../config';
+import { connect } from 'react-redux';
+import { setSongIndex, setSongList } from '../../../store/actions/index';
 import icon from '../../../Images/vibe.png';
 
-function MypageMusic () {
+
+function MypageMusic ({ setSongList, setSongIndex, songList, songIndex }) {
+  const [ favoriteMusic, setFavoriteMusic ] = useState([]);
+
+  useEffect(() => {
+      const token = localStorage.getItem('access_token');
+      console.log("token: ", token)
+      fetch(`${API}/account/myfavorite` , {
+      method: "GET",
+      headers : {
+          "Content-type" : "application/json",
+          "Authorization" : token
+      },
+      })
+      .then(res => res.json())
+      .then(res => setFavoriteMusic(res.data))
+      .catch(err => console.log("err: ", err));
+  },[]);
+
+  const allPlayBtn = (play) => {
+    const token = localStorage.getItem('access_token');
+    const array = [];
+    const tmp = songList.length;
+    for(let i = 0;  i< play.length; i ++ ) {
+      array.push(play[i].id);
+    }
+  
+    fetch(`${API}/music/playlist`, {
+      method: "POST",
+      headers: {
+        "Content-type" : "application/json",
+        "Authorization" : token
+      },
+      body: JSON.stringify({
+        music_id: array
+      })
+    })
+    .then(res => {
+      if(res.status === 200) {
+        fetch(`${API}/music/playlist`, {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then(res => res.json())
+        .then(res => {
+          setSongList(res.music);
+        });
+        songList[tmp] && setSongIndex(tmp);
+      } else {
+        for(let i = 0;i< songList.length; i++){
+          if(songList[i].id === play[0].id){
+            setTimeout(setSongIndex(i),1000)
+          }
+        }
+      }
+    });
+  }
+
   return (
     <MypageMusicTag>
           <TitleWrap>
@@ -12,11 +73,9 @@ function MypageMusic () {
                 <Title>보관함</Title>
                 <AreaSubTit>노래</AreaSubTit>
               </div>
-              {/* 좋아요 노래가 있으면 렌더링 */}
-
-              {/* <div className="buttonBox">
+              <div className="buttonBox">
                 <div className="buttonWrap">
-                  <button type="button" className="playBtn">
+                  <button type="button" className="playBtn" onClick={() => {allPlayBtn(favoriteMusic)}}>
                     <span>전체재생</span>
                   </button>
                 </div>
@@ -25,25 +84,53 @@ function MypageMusic () {
                     <span>랜던재생</span>
                   </button>
                 </div>
-              </div> */}
-              
-              {/* 좋아요 노래가 있으면 렌더링 */}
+              </div>
             </TitleBox>
           </TitleWrap>
-          <Inner>
-            <InnerArea>
-              <AreaTit>좋아하는 노래</AreaTit>
-              <SubTit>내가 좋아하는 노래들을 모아서 감상해보세요.</SubTit>
-            </InnerArea>
-          </Inner>
+          <div>
+            {
+              favoriteMusic && favoriteMusic ? (
+                favoriteMusic.map((music,i) => {
+                  return (
+                    <SelectedList
+                      key={music.id}
+                      img={music.image}
+                      name={music.name}
+                      artist={music.artist}
+                      album={music.album}
+                      list={music.lyrics}
+                      lyrics={music.lyrics}
+                      select={music.select}
+                      like={music.like}
+                    />
+                  );
+                })) : (
+                <Inner>
+                  <InnerArea>
+                    <AreaTit>좋아하는 노래</AreaTit>
+                    <SubTit>내가 좋아하는 노래들을 모아서 감상해보세요.</SubTit>
+                  </InnerArea>
+                </Inner>
+              )
+            }
+          </div>
     </MypageMusicTag>
   )
-}
+};
 
-export default MypageMusic;
+const mapStateToProps = (state) => {
+  return {
+    songList: state.songList,
+    songIndex: state.songIndex
+  };
+};
+
+export default connect(mapStateToProps, { setSongIndex, setSongList })(MypageMusic);
 
 const MypageMusicTag = styled.div`
   height: 100%;
+  width: 964px;
+  margin: 0 auto;
 `;
 
 const TitleWrap = styled.h2`
@@ -72,6 +159,7 @@ const TitleBox = styled.div`
     button {
       display: flex;
       align-items: center;
+      justify-content: center;
       width: 134px;
       padding: 10px;
       border-radius: 4px;
@@ -82,6 +170,7 @@ const TitleBox = styled.div`
             ${beforeIcon};
             width: 19px;
             height: 20px;
+            margin-bottom: 2px;
             background-position: -592px -689px;
           }
         span {

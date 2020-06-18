@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import SearchInput from './SearchInput';
 import NavMenu from './NavMenu';
 import ExtreMenu from './ExtraMenu';
+import { API } from '../../config';
 import icon from '../../Images/vibe.png';
 
 
@@ -21,9 +22,9 @@ function SideNav () {
   const onSearchInput = () => {
     setIsSearch(!isSearch);
   }
+  
   let history = useHistory();
   const onLogout = () => {
-    console.log("logout click");
     window.localStorage.clear();
     history.push('/');
     window.location.reload();
@@ -35,7 +36,7 @@ function SideNav () {
 
   const Login = () => {
     Naver();
-    GetProfile();
+    UserProfile();
   }
 
   useEffect(Login, []);
@@ -49,29 +50,15 @@ function SideNav () {
       callbackHandle: true
     });
     naverLogin.init();
-
-    // naverLogin.getLoginStatus(function (status) {
-    //   if (status) {
-    //     console.log("status: ", status)
-    //     let profileImage = naverLogin.user.getProfileImage();
-    //     let id = naverLogin.user.getId();
-    //     var email = naverLogin.user.getEmail();
-    //     console.log("profileImage: ", profileImage);
-    //     console.log("id: ", id);
-    //     console.log("email: ", email);
-    //   } else {
-    //     console.log("AccessToken이 올바르지 않습니다.");
-    //   }
-    // });
   }
 
-  const GetProfile = () => {
+  const UserProfile = () => {
     window.location.href.includes('access_token') && GetUser();
     function GetUser() {
       const location = window.location.href.split('=')[1];
       const token = location.split('&')[0];
       console.log("token: ", token);
-      fetch("http://10.58.0.37:8000/account/sign-in" , {
+      fetch(`${API}/account/sign-in` , {
         method: "GET",
         headers : {
           "Content-type" : "application/json",
@@ -82,13 +69,14 @@ function SideNav () {
       .then(res => {
         localStorage.setItem("access_token", res.token);
         setUserData({
-          nickname : res.name,
+          nickname : res.nickname,
           image : res.image
         })
       })
       .catch(err => console.log("err : ", err));
     }
   };
+  
   
   return (
     <SideNavTag>
@@ -131,7 +119,7 @@ function SideNav () {
               </SideLogin>
             )
           }
-          <NavMenu />
+          <NavMenu/>
           <ExtreMenu/>
         </Container>
       </SideNavInner>

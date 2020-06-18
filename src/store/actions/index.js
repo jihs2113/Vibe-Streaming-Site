@@ -36,13 +36,6 @@ export const setPlaying = () => {
   };
 };
 
-export const setAddPlaylist = (playlist) => {
-    return {
-        type: "ADD_PLAYLIST",
-        payload: playlist
-    };
-};
-
 export const setSongList = (songList) => {
   return {
     type: "SONGLIST",

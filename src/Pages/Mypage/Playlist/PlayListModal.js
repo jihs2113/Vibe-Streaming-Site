@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes, css } from 'styled-components';
-
+import { API } from '../../../config';
 
 function PlayListModal({ visible, isCloseModal }) {
     const [ inputs, setInputs ] = useState("");
@@ -19,10 +19,9 @@ function PlayListModal({ visible, isCloseModal }) {
     }
 
     const playListRegister = () => {
-        console.log("value: ", inputs);
+
         const token = localStorage.getItem("access_token");
-        console.log("tokenModal: ",token);
-        fetch("http://10.58.2.47:8000/music/myplaylist", {
+        fetch(`${API}/music/myplaylist`, {
             method: "POST",
             headers : {
                 "Content-type" : "application/json",
@@ -42,7 +41,6 @@ function PlayListModal({ visible, isCloseModal }) {
 
     useEffect(() => {
         if(inputs.length === 0) {
-            console.log("0")
             setIsButton(false);
         }else if(inputs.length > 0)  {
             setIsButton(true);
@@ -143,7 +141,6 @@ const PlayModal = styled.div`
     animation-timing-function: ease-out;
     animation-name: ${fadeIn};
     animation-fill-mode: forwards;  /* 애니메이션 끝나고 유지시켜주기 */
-
     ${props => props.disappear && css`
         animation-name: ${fadeOut};
     `}
