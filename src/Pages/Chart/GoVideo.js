@@ -6,7 +6,7 @@ import icon from '../../Images/vibe.png';
 
 
 
-const GoChart = (props) => {
+const GoVideo = (props) => {
 
   const [ musicState, setMusicState ] = useState([]);
   const [ test, setTest ] =useState([]);
@@ -53,6 +53,17 @@ const GoChart = (props) => {
   
 
   return (
+        // <List>
+        //   <li className="ListItem">
+        //       <div className="ListImg">
+        //         <img src={props.m_url} style={{zIndex:"999999"}} alt=""/>
+
+        //       </div>
+
+        //   </li>
+
+
+        // </List>
         
           <Tbody>
             
@@ -62,34 +73,13 @@ const GoChart = (props) => {
                   <SelectOne onMouseEnter={()=> Over()} onMouseLeave={()=> Over()}>
                       <div className="kmk">
                         <img 
-                            src={props.img} className="mk" style={{width: 40, height: 40, }} alt=""/>
+                            src={props.m_url} className="mk" style={{width: 40, height: 40, }} alt=""/>
                       </div>
-                      {/* { gokState ?
-                        ( <img 
-                          src={d.m_url} className="mk" style={{width: 40, height: 40, }} alt=""/>)
-                          : <Gok></Gok>
-
-                      } */}
-                      
-                     
-                      {/* <Gok src={d.m_url} >
-
-                      </Gok> */}
-                      {/* { gokState ?
-                        (
-                          <img 
-                            src={d.m_url} className="mk" style={{width: 40, height: 40, }} alt=""/>
-                         ) 
-                        : 
-                          <img 
-                            src={<Mplay></Mplay>} style={{width: 40, height: 40, }} alt=""/>
-                         
-                      } */}
                       <Part>
                         <Ta>{props.id}</Ta>
                         <Tl>
                           <Td style={{color: "black"}}>{props.name}</Td>
-                          <Tc>{props.artist}</Tc>
+                          <Tc>{props.vocal}</Tc>
                         </Tl>
                       </Part>
                   </SelectOne>
@@ -115,6 +105,33 @@ display: inline-block;
 content: "";
 background: url(${icon}) no-repeat;
 `;
+
+// const List = styled.div`
+//   margin-left: 16px;
+//   display: flex;
+//   flex-direction: column;
+//   margin-top: 10px;
+//   flex-wrap:wrap;
+//   width:500px;
+//   max-width: 1270px;
+//   .ListItem{
+//    display: flex;
+//    flex-direction: row;
+//    align-items: center;
+//    width: 50%;
+//    .ListImg{
+//     width:100%;
+//      height:100%;
+//      display: flex;
+//      align-items: center;
+//      justify-content: flex-start;
+//      margin: 10px;     
+//      position: relative;
+//    }
+//   }
+
+// `
+
 
 const Tbody = styled.div`
   display: flex;
@@ -244,4 +261,4 @@ const Tl = styled.div`
 
 
 
-export default withRouter(GoChart);
+export default withRouter(GoVideo);
