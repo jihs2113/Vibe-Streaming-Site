@@ -43,9 +43,9 @@ const SmallModal = (props) => {
            <Like>
                { props.toggle ? (
                    <Joayo onMouseEnter={() => OverChange()}
-                   onClick={() => props.Heart(props.test.test && props.test.test.like)}>좋아요</Joayo>
+                   onClick={() => props.Heart(props.test.id)}>좋아요</Joayo>
                 ) :<Joayo onMouseEnter={() => OverChange()}
-                onClick={() => props.Heart(props.test.test && props.test.test.like)}>좋아요 취소</Joayo>
+                onClick={() => props.Heart(props.test.id)}>좋아요 취소</Joayo>
                }
            </Like>
            <MyList>

@@ -3,9 +3,10 @@ import {withRouter} from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import icon from '../../Images/vibe.png';
 import TopChart from './TopChart';
-import SideNav from '../../Components/SideNav/SideNav';
+import { connect } from "react-redux";
+import { setMKList } from "../../store/actions/index";
 
-function Chart () {
+function Chart (props) {
   let date = new Date();
   let day = date.getDate();
   const [time] = useState([day]);
@@ -36,41 +37,65 @@ function Chart () {
     }, []);
     return state;
   };
+  // const CloseNav = () =>{
+   
+  // }
 
   // const useClick = () =>{
 
   // }
-
+  console.log("op", props.mkList.length);
   const { y } = useScroll();
   // const { w } = useClick();
     return ( 
       <>
-        <Nav style={{opacity: y> 80 ? "1" : "0"}}>
-          <Bar>
-            <Topic>오늘 Top 100</Topic>
-            <TopicPlay>
-              <PlayAll>
-                  <SelectAll>전체재생</SelectAll>
-              </PlayAll>
-              <PlaySelect>
-                  <RanPlay>랜덤재생</RanPlay>
-              </PlaySelect>
-              <More>
-                <MoreDot></MoreDot>
-              </More>
-            </TopicPlay>
-          </Bar>
-        </Nav>
-
-        <Option>
+      {/* {
+        props.mkList.length >=1 ?
+        (
+          <Nav style={{opacity: y> 80 ? "1" : "0"}}>
+            <Bar>
+              <Topic>오늘 Top 100</Topic>
+              <TopicPlay>
+                <PlayAll>
+                    <SelectAll>전체재생</SelectAll>
+                </PlayAll>
+                <PlaySelect>
+                    <RanPlay>랜덤재생</RanPlay>
+                </PlaySelect>
+                <More>
+                  <MoreDot></MoreDot>
+                </More>
+              </TopicPlay>
+            </Bar>
+          </Nav>
+        ) : null
+      } */}
+         <Nav style={{opacity: y> 80 && props.mkList.length===0 ? "1" : "0"}}>
+           <Bar>
+             <Topic>오늘 Top 100</Topic>
+             <TopicPlay>
+               <PlayAll>
+                   <SelectAll>전체재생</SelectAll>
+               </PlayAll>
+               <PlaySelect>
+                   <RanPlay>랜덤재생</RanPlay>
+               </PlaySelect>
+               <More>
+                 <MoreDot></MoreDot>
+               </More>
+             </TopicPlay>
+           </Bar>
+         </Nav>
+        {/* style={{opacity: props.mkList.length >=1 ? "1" : "0"}} */}
+        <Option style={{opacity: props.mkList.length >=1 ? "1" : "0"}}>
           <div className="AddNav">
             <div className="SelectBtn">
                 <div className="Abtn">
                   <input type="checkbox"/>
                   <span>전체선택</span>
-                  <span style={{fontWeight:600, color:"#ff1150"}}>2곡 선택</span>
+                  <span style={{fontWeight:600, color:"#ff1150"}}>{props.mkList.length}곡 선택</span>
                 </div>
-                <div className="CloseBtn"></div>
+                <div className="CloseBtn" ></div>
             </div>
             <div className="ManyBtn">
                 <div className="BtnWrap">
@@ -93,24 +118,6 @@ function Chart () {
             </div>
           </div>
         </Option>
-        {/* <Nav style={{opacity: w> 80 ? "1" : "0"}}>
-          <Bar>
-            <Topic>오늘 Top 100</Topic>
-            <TopicPlay>
-              <PlayAll>
-                  <SelectAll>전체재생</SelectAll>
-              </PlayAll>
-              <PlaySelect>
-                  <RanPlay>랜덤재생</RanPlay>
-              </PlaySelect>
-              <More>
-                <MoreDot></MoreDot>
-              </More>
-            </TopicPlay>
-          </Bar>
-        </Nav> */}
-        {/* <SideNav/> */}
-
         <Container>
           <Content>
             <Title>오늘 Top 100</Title>
@@ -150,6 +157,17 @@ function Chart () {
       </>
      )
   }
+
+  
+const mapStateToProps = (state)=>{
+  return{
+    mkList : state.mkList
+  };
+};
+
+export default connect(mapStateToProps,{ setMKList })(withRouter(Chart));
+
+
   const beforeIcon = css`
   display: block;
   content: "";
@@ -168,7 +186,7 @@ function Chart () {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  z-index:9999;
+  /* z-index:999999; */
 
 `
 const Option = styled.div`
@@ -359,8 +377,8 @@ const Option = styled.div`
     /* max-width:1270px; */
     top: 0;
     right: 0;
-    left: 225px;
-    z-index: 30;
+    left: 250px;
+    z-index: 999999;
     background-color: hsla(0,0%,95.3%,.94);
     padding-left: 7%;
     /* padding-right: 10%; */
@@ -570,4 +588,4 @@ const TrackList = styled.div`
 
 `
 
-export default withRouter(Chart);
+

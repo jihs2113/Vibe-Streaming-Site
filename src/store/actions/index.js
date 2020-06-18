@@ -40,8 +40,8 @@ export const setAddPlaylist = (playlist) => {
     return {
         type: "ADD_PLAYLIST",
         payload: playlist
-    }
-}
+    };
+};
 
 export const setSongList = (songList) => {
   return {
@@ -55,4 +55,10 @@ export const setSongIndex = (songIndex) =>{
     type: "SONGINDEX",
     payLoad: songIndex
   }
+};
+export const setMKList = (id) => {
+  return{
+    type: "ADD_ID",
+    payload: id
+  };
 };

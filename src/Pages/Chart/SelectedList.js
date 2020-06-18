@@ -2,7 +2,8 @@ import React, {useState , useEffect} from 'react';
 import {withRouter} from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import icon from '../../Images/vibe.png';
-
+import { connect } from "react-redux";
+import { setMKList } from "../../store/actions/index";
 import WinModal from './WinModal';
 import SmallModal from './SmallModal';
 
@@ -13,7 +14,8 @@ const SelectedList = (props) => {
   const [ modalState, setModalState ] = useState(false);
   const [ likeState, setLikeState ] = useState(false);
   const [ toggle, setToggle ] = useState(true);
-  const [cot, setCot]=useState([])
+  const [cot, setCot]=useState([]);
+  const [lastLove, setLastLove] = useState([]);
   // const [ count, setCount ] = useState({
   //     ct:0,
   //     dt:[],
@@ -58,13 +60,32 @@ const SelectedList = (props) => {
   }
   // const {ct, dt, st} = count
 
-  const AddList = (id) =>{
-    setCot(cot=> [...cot, id])
+  const AddList = (listId) =>{
+    fetch(`http://10.58.0.37:8000/account/myfavorite`, {
+      method: 'POST' ,  
+      headers: {  
+        Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Indsc3hvMjExMkBuYXZlci5jb20ifQ.i9ZWIGY6MUxYXcL344nsrwBiXD4hpvEavLGdYfaBSOs",
+      },
+      body: JSON.stringify({
+        music_id: listId,
+      }),
+    });
   }
 
-  const Heart = (like) =>{
+  const Heart = (likgId) =>{
     setLikeState(!likeState)
     setToggle(!toggle)
+    fetch(`http://10.58.0.37:8000/account/myfavorite`, {
+      method: toggle ? "POST" : "DELETE",  
+      headers: {  
+        Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Indsc3hvMjExMkBuYXZlci5jb20ifQ.i9ZWIGY6MUxYXcL344nsrwBiXD4hpvEavLGdYfaBSOs",
+      },
+      body: JSON.stringify({
+        music_id: likgId,
+      }),
+    });
+    // setLastLove(likgId)
+    
   }
 
   const HandleLink = (id) =>{
@@ -142,16 +163,49 @@ const SelectedList = (props) => {
 
   // console.log("po",props&&props.name);
   // console.log("sddd",musicState);
-  console.log("cot",cot)
+  // console.log("cot",cot)
+  const [ sum, setSum ] = useState({
+    // num:0,
+    // check:false,
+    cnt:[]
+  })
 
+  const Check = (e, id) =>{
+    // console.log("dds",e.target.checked);
+    // console.log("ddr", id);
+    // console.log("dns",e.target);
+
+    props.setMKList(id);
+    console.log("js",props);
+    console.log("jh",props.mkList.length);
+    
+    fetch(`http://10.58.0.37:8000/music/add/${id}`, {
+      method: "POST" ,  
+      headers: {  
+        Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Indsc3hvMjExMkBuYXZlci5jb20ifQ.i9ZWIGY6MUxYXcL344nsrwBiXD4hpvEavLGdYfaBSOs",
+      },
+      body: JSON.stringify({
+        music_id: props.mkList,
+      }),
+    });
+
+    // console.log(props.mkList);
+    // setSum{(
+
+    // )}
+
+  }
+
+
+  // console.log("nb",lastLove);
   return (
           <Tbody>          
             {/* {props&&props.map((music, i) => ( */}
               <tr key={props&&props.id}>
                 <OneList>
                   <th scope="row">
-                    <input type="checkbox" 
-                      onChange={(event)=>props.CountChange(props.id)}
+                    <input type="checkbox" onChange={(event)=>Check(event,props.id )}
+                      // onChange={(event)=>props.CountChange(props.id)}
                       // onChange={event =>{
                       //   let checked = event.target.checked;
                       //   props.select=checked;
@@ -192,7 +246,7 @@ const SelectedList = (props) => {
                   </th>
                   <SelectOne>
                       <img src={props && props.img} alt=""/>
-                      <Num>{props && props.id}</Num>
+                      <Num>{props && props.rank}</Num>
                       <Name onClick={()=>HandleLink(props.id)}
                         style={{color: "black"}}>{props && props.name}</Name>
                       <ArtistAlbum>{props && props.artist}</ArtistAlbum>
@@ -222,6 +276,14 @@ const SelectedList = (props) => {
         
   );
 }
+
+const mapStateToProps = (state)=>{
+  return{
+    mkList : state.mkList
+  };
+};
+
+export default connect(mapStateToProps,{ setMKList })(withRouter(SelectedList));
 
 
 const beforeIcon = css`
@@ -416,4 +478,3 @@ const Tlike = styled.button`
 
 `
 
-export default withRouter(SelectedList);

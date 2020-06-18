@@ -33,15 +33,15 @@ function VideoChart() {
         if(slideState==0){
             return;
         }
-        setSlideState(slideState+1000);
+        setSlideState(slideState+900);
 
     }
   
     const Pright = () =>{
-        if(slideState==-10000){
+        if(slideState==-2700){
             return;
         }
-      setSlideState(slideState-1000);
+      setSlideState(slideState-900);
       
   
     }
@@ -121,7 +121,7 @@ const Content = styled.div`
 //       font-weight: 600;
 // `
 const List = styled.div`
-    padding: 18px 0;
+    padding: 50px 0 0 0;
     /* max-width: 1273px; */
     position: relative;
     width: 100%;
@@ -195,12 +195,12 @@ const GoList = styled.div`
 `
 
 const Camp = styled.div`
-    padding: 18px 0;
+    padding: 50px 0 0 30px;
     /* max-width:1270px; */
     height:430px;
     /* margin: 0 auto; */
     display:flex;
-    align-items: column;
+    align-items: center;
     /* display: block; */
     /* overflow-x: hidden; */
     text-overflow: ellipsis;
@@ -208,7 +208,7 @@ const Camp = styled.div`
     word-break: break-all;
 
     position: absolute;
-    width: 100%;
+    /* width: 100%; */
     left: ${props => props.slideState}px;
     transition: left ease-out 0.4s;
 
@@ -217,7 +217,7 @@ const Camp = styled.div`
     flex-direction: column;
     margin-top: 10px;
     flex-wrap:wrap;
-    width:80%;
+    width:100%;
   /* max-width: 1270px; */
 
 `
