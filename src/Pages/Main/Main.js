@@ -91,7 +91,7 @@ const Container = styled.div`
             width: 100%;
             height:100%;
             /* margin-left: 250px; */
-            z-index:9999;
+            /* z-index:9999; */
 
 `
 const Header = styled.div`
@@ -134,10 +134,11 @@ const Header = styled.div`
     
 
 const Content = styled.div`
-      width:100%;
+      width:964px;
       height:450px;
-      margin: 12px 0 20px 0;
-     
+      margin: 12px auto 20px auto;
+      overflow:hidden;
+      
 
 `
 

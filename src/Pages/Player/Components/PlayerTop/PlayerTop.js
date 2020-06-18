@@ -19,5 +19,4 @@ function PlayerTop () {
 export default PlayerTop;
 
 const PlayerTopTag = styled.div`
-
 `;
