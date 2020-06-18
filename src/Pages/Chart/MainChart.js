@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import {withRouter} from 'react-router-dom';
 import styled, {css} from 'styled-components';
 import icon from '../../Images/vibe.png';
-// import SideNav from '../../Components/SideNav/SideNav';
 import GoChart from './GoChart';
 
 
@@ -44,12 +43,10 @@ function MainChart(props) {
       
   
     }
-    console.log("count",slideState);
 
     return (
         <>
-       
-        {/* <SideNav/> */}
+      
         <Container>
             <Content>
                 {/* <Title>차트</Title> */}
@@ -73,17 +70,11 @@ function MainChart(props) {
                                 rank={i+1}
                             />
                         ))}
-                        
-
                     </Camp>
 
                 </List>
             </Content>
         </Container>
-
-
-
-
         </>
     )
 }
@@ -106,7 +97,7 @@ const Container = styled.div`
   margin-bottom:20px;
  
   height: 100%;
-  background-color: white;
+  background-color: #fbfbfb;
 
 `
 
@@ -114,13 +105,10 @@ const Content = styled.div`
       /* max-width: 1273px; */
       position: relative;
       width: 100%;
-      background-color: white;
+      background-color: #fbfbfb;
+      
 `
-// const Title = styled.div`
-//       color: black;
-//       font-size: 30px;
-//       font-weight: 600;
-// `
+
 const List = styled.div`
     padding: 18px 0 0 35px;
     /* max-width: 1273px; */

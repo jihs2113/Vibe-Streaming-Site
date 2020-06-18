@@ -10,23 +10,7 @@ const SmallModal = (props) => {
     const OverChange = () => {
         setOneState(!oneState);
     }
-
-    // const AddList =(id) =>{
-    //     setIdList(
-    //        idList => [...idList, id] 
-           
-    //     );
-
-
-    //     // console.log("oisi",id);
-    //     console.log(idList)
-    // }
-    // console.log("hi", props.saw.saw && props.saw.saw);
-    // console.log("ediya", props.test.test && props.test.test.select);
-    // console.log("likeee?", props.saw.saw && props.saw.saw);
-    // console.log("bbr", props.position&&props.position);
-    // console.log("tg",props.toggle);
-    // console.log("xxc",idList)
+    
     return (
         <LikeInner>
            <Title>

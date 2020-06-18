@@ -20,7 +20,7 @@ function Layout(props) {
 export default Layout;
 
 const LayoutTag = styled.div`
-    height: 100vh;
+    height: 100%;
 
 `;
 
@@ -38,7 +38,8 @@ const Content = styled.div`
   top: 0;
   left: 250px;
   right: 0;
-  height: 100%;
+
+  background: #fbfbfb;
   @media(max-width: 768px) {
     width: 100%;
     left: 0;

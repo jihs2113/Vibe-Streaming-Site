@@ -19,41 +19,25 @@ function VideoChart() {
         fetch("/jh_data/jh.json")
         .then((res) => res.json())
         .then((res) => setVideoState(res.data));
-
-
     }, []);
-
-    // const HandleLink = () =>{
-    //     props.history.push("Chart");
-    // }
-
-    
-
+  
     const Pleft = () =>{
         if(slideState==0){
             return;
         }
         setSlideState(slideState+900);
-
     }
-  
     const Pright = () =>{
         if(slideState==-2700){
             return;
         }
       setSlideState(slideState-900);
-      
-  
     }
-    console.log("count",videoState);
 
     return (
         <>
-       
-        {/* <SideNav/> */}
         <Container>
             <Content>
-                {/* <Title>차트</Title> */}
                 <List>
                     <button className="left" onClick={()=>Pleft()}></button>
                     <button id="right" onClick={()=>Pright()}></button>
@@ -72,15 +56,10 @@ function VideoChart() {
                             />
                         ))}
                         
-
                     </Camp>
-
                 </List>
             </Content>
         </Container>
-
-
-
 
         </>
     )
@@ -104,7 +83,7 @@ const Container = styled.div`
   margin-bottom:20px;
  
   height: 100%;
-  background-color: white;
+  background-color: #fbfbfb;
 
 `
 
@@ -112,15 +91,11 @@ const Content = styled.div`
       /* max-width: 1273px; */
       position: relative;
       width: 100%;
-      background-color: white;
+      background-color:  #fbfbfb;
       overflow:hidden;
       
 `
-// const Title = styled.div`
-//       color: black;
-//       font-size: 30px;
-//       font-weight: 600;
-// `
+
 const List = styled.div`
     padding: 50px 0 0 35px;
     /* max-width: 1273px; */

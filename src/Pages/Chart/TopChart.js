@@ -11,44 +11,12 @@ function TopChart () {
     fetch("http://10.58.0.37:8000/music/chart")
     .then((res) => res.json())
     .then((res) => setMusicState(res.data));
-    // setMusicState(
-    //   musicState.map((d) => {
-    //     return{
-    //       id: d.id,
-    //       album: d.album,
-    //       img: d.m_url,
-    //       name: d.name,
-    //       vocal: d.vocal,
-    //       select:false,
-    //     };
-    //   })
-    // );
-    // setMusicState(musicState);
+    
   }, []);
-  
-  // useEffect(() => {
-  //   fetch("/jh_data/jh.json")
-  //   .then((res) => res.json())
-  //   .then((res) => setMusicState(res.data));
-  //   setMusicState(
-  //     musicState.map((d) => {
-  //       return{
-  //         id: d.id,
-  //         album: d.album,
-  //         img: d.m_url,
-  //         name: d.name,
-  //         vocal: d.vocal,
-  //         "select":false,
-  //       };
-  //     })
-  //   );
-  //   setMusicState(musicState);
-  // }, []);
   
   const CountChange = (id)=>{
     setSnt(snt => [...snt, id])
   }
-  console.log("sibal",snt)
   return (
       <div className="container">
         <Table> 
@@ -63,8 +31,6 @@ function TopChart () {
               select={music.select}
               rank = {i+1}
             />
-
-
           ))}
           
         </Table>
