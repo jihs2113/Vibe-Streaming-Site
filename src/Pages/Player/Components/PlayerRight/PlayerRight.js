@@ -3,30 +3,33 @@ import styled, { css } from 'styled-components';
 import axios from 'axios';
 import icon from '../../../../Images/vibe.png';
 import { connect } from "react-redux";
-import { shuffle,  setSongInfo, setRepeatIndex } from "../../../../store/actions";
+import url from "../../../../config";
+import { shuffle,  setSongInfo, setRepeatIndex, setSongList, setSongIndex } from "../../../../store/actions";
 
-function PlayerRight ({popup,shuffleIndex,shuffle,setSongInfo,setRepeatIndex, repeatIndex}) {
-  const [music, setMusic] = useState({});
+function PlayerRight ({popup,shuffleIndex,shuffle,setSongInfo, setSongIndex, setRepeatIndex, repeatIndex, setSongList, songList}) {
   const [current, setCurrent] = useState();
   const id = useRef(null);
   const [standardY, setStandardY] = useState();
+  const [songArray, setSongArray] = useState();
   useEffect(() => {
-    axios({url: 'http://localhost:3000/galbi_data/galbi.json'}).then(res=>{
-      setMusic(res.data.music);
-      setSongInfo(res.data.music[0]);
+    fetch(`${url}/music/playlist`, {
+      headers: {
+        Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Indsc3hvMjExMkBuYXZlci5jb20ifQ.i9ZWIGY6MUxYXcL344nsrwBiXD4hpvEavLGdYfaBSOs",
+      },
+    }).then(res=>res.json()).then(res=>{ 
+      setSongList(res.music);
+      setSongInfo(res.music[0]);
     });
   }, []);
 
   const removeSong = (index)=>{
-    let tmp = [...music];
+    let tmp = [...songList];
     tmp.splice(index,1);
-    setMusic(tmp);
+    setSongList(tmp);
   }
 
   function onDragStart(e){
-
     const target = e.target;
-    console.log(target);
     e.dataTransfer.setData('text', target.id);
     setCurrent(target.id);
     e.dataTransfer.effectAllowed = "move";
@@ -36,10 +39,10 @@ function PlayerRight ({popup,shuffleIndex,shuffle,setSongInfo,setRepeatIndex, re
   function onDragEnd(e){
     const target = e.target;
     setTimeout(()=>{target.style.opacity = '1'},0);
-    const tmpSong = music[current];
-    let tmpMusic = [...music];
+    const tmpSong = songList[current];
+    let tmpMusic = [...songList];
     tmpMusic[current] = tmpSong;
-    setMusic(tmpMusic);
+    setSongList(tmpMusic);
     setCurrent("-1000");
   }
 
@@ -52,17 +55,37 @@ function PlayerRight ({popup,shuffleIndex,shuffle,setSongInfo,setRepeatIndex, re
     if(Over===current){
       return;
     }
-    const tmpSong = music[current];
-    console.log("tmpSong",tmpSong);
-    let tmpMusic = [...music];
+    const tmpSong = songList[current];
+    let tmpMusic = [...songList];
     tmpMusic[current] = tmpMusic[Over.id];
     setTimeout(()=>{Over.style.opacity = '1'},0);
     tmpMusic[Over.id] = tmpSong;
-    setMusic(tmpMusic);
+    setSongList(tmpMusic);
     setCurrent(Over.id);
     e.dataTransfer.dropEffect = "move";
     }
   }
+  const [goto,setGoto]=useState(false);
+
+  const clickElement = (i) => {
+    setSongInfo(songList[i]);
+    setSongIndex(i);
+  };
+
+  useEffect(()=>{
+    if(shuffleIndex==="-470px -627px"){
+      let tmp = [...songList];
+      for(let i = tmp.length-1; i > 0; i--){
+        const j = Math.floor(Math.random() * i)
+        const temp = tmp[i]
+        tmp[i] = tmp[j]
+        tmp[j] = temp
+      }
+      setSongArray(tmp);
+    }else{
+      setSongArray(songList);
+    }
+  },[songList, shuffleIndex]);
 
   return (
     <PlayerRightTag popup={popup}>
@@ -75,23 +98,23 @@ function PlayerRight ({popup,shuffleIndex,shuffle,setSongInfo,setRepeatIndex, re
         
       </ListHeader>
       <List >
-        {music[0] && music.map((musicElement,i) => {
+        {songArray && songArray.map((musicElement,i) => {
           if(Number(current) === i){
             return(<Element></Element>)
           }else{
           return(  
-            <Element id={i} onClick={()=>setSongInfo(music[i])} draggable onDragOver={(event)=>onDragOver(event)} onDragStart={(event)=>onDragStart(event)} onDragEnd={(event)=>onDragEnd(event)} >
-            <SmallImg src={musicElement.urlSmall} />
-            <Text>
-              <TextTop>
-                {musicElement.title}
-              </TextTop>
-              <TextBottom>
-                {musicElement.artist}
-              </TextBottom>
-            </Text>
-            <DeleteIcon onClick={() => removeSong(i)} />
-          </Element>
+            <Element id={i} draggable onClick={!goto ? (()=>clickElement(i)): (()=>{})} onDragOver={(event)=>onDragOver(event)} onDragStart={(event)=>onDragStart(event)} onDragEnd={(event)=>onDragEnd(event)} >
+              <SmallImg src={musicElement.urlSmall}/>
+              <Text>
+                <TextTop >
+                  {musicElement.title}
+                </TextTop>
+                <TextBottom >
+                  {musicElement.artist}
+                </TextBottom>
+              </Text>
+              <DeleteIcon onMouseEnter={()=>setGoto(true)} onMouseLeave={()=>setGoto(false)} onClick={() => removeSong(i)} />
+            </Element>
         )}})}
       </List>
     </PlayerRightTag>
@@ -102,11 +125,12 @@ const mapStateToProps = (state) => {
   return{
     shuffleIndex: state.shuffleIndex,
     popup: state.popup,
-    repeatIndex: state.repeatIndex
+    repeatIndex: state.repeatIndex,
+    songList: state.songList
   };
 };
 
-export default connect(mapStateToProps,{ shuffle, setSongInfo, setRepeatIndex })(PlayerRight);
+export default connect(mapStateToProps,{ shuffle, setSongInfo, setRepeatIndex, setSongList, setSongIndex })(PlayerRight);
 
 const fullIcon = css`
   display: block;
@@ -115,14 +139,14 @@ const fullIcon = css`
 `;
 
 const PlayerRightTag = styled.div`
-  position: absolute;
-  top: ${props=>props.popup? '0' : '1000vh'};
-  opacity:${props=>props.popup? '1' : '0'};
+  position: fixed;
+  height: ${props=>!props.popup? '0' : '100%'};
+  /* opacity:${props=>props.popup? '1' : '0'}; */
   right: 0;
-  bottom: 81px;
+  bottom: 0;
   width: 350px;
   background-color: #141414;
-  transition: all 1s ease-in-out;
+  transition: all 0.2s ease-in-out;
   z-index:9999;
   @media (max-width: 700px) {
     width: 100%;

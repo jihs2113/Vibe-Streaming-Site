@@ -39,8 +39,6 @@ const Content = styled.div`
   left: 250px;
   right: 0;
   height: 100%;
-  width: 964px;
-  margin: 0 auto;
   @media(max-width: 768px) {
     width: 100%;
     left: 0;

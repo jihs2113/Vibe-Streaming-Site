@@ -5,8 +5,8 @@ import { songInfo } from "./songInfo";
 import { popup } from "./popup";
 import { repeatIndex } from "./repeat";
 import { playing } from "./playing";
+import { songList } from "./songList";
+import { songIndex } from "./songIndex";
 import { playList } from './playList';
-
-const rootReducer = combineReducers({ shuffleIndex, songInfo, popup, repeatIndex, navList, playing, playList});
-
+const rootReducer = combineReducers({ shuffleIndex, songInfo, songList, songIndex, popup, repeatIndex, navList, playing, playList});
 export default rootReducer;

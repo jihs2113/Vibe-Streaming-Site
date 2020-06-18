@@ -143,10 +143,10 @@ export default SideNav;
 
 const SideNavTag = styled.header`
   position: fixed;
+  
   top: 0;
-  z-index: 9999;
   background-color: #000;
-  width: 250px;
+  width: 250px; 
   height: 100vh;
   @media(max-width: 768px) {
       width: 100%;
@@ -155,11 +155,13 @@ const SideNavTag = styled.header`
 `;
 
 const SideNavInner = styled.div`
+  z-index: 9999;
   height: 100%;
   padding: 0 20px;
 `;
 
 const Container = styled.div`
+
   width: 100%;
   height: 100%;
   @media(max-width: 768px) {

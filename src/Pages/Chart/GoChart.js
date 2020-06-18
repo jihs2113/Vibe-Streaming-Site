@@ -48,10 +48,6 @@ const GoChart = (props) => {
   //   setToggle(!toggle)
   // }
 
-  // console.log("zsk",saw);
-  // console.log("sc",gokState);
-  
-
   return (
         
           <Tbody>

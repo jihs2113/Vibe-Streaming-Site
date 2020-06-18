@@ -43,3 +43,16 @@ export const setAddPlaylist = (playlist) => {
     }
 }
 
+export const setSongList = (songList) => {
+  return {
+    type: "SONGLIST",
+    payLoad: songList
+  };
+};
+
+export const setSongIndex = (songIndex) =>{
+  return {
+    type: "SONGINDEX",
+    payLoad: songIndex
+  }
+};

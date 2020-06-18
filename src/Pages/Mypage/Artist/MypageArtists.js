@@ -56,6 +56,8 @@ export default MypageArtists;
 
 const MypageArtistTag = styled.div`
   height: 100%;
+  width: 964px;
+  margin: 0 auto;
 `;
 
 const TitleWrap = styled.h2`

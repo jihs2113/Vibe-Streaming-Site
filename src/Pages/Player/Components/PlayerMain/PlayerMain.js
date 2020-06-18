@@ -9,7 +9,7 @@ function PlayerMain ({songInfo, setPopup, popup}) {
   
   return (
     <PlayerMainTag popup={popup} onClick={()=>{!curr && setPopup()}}>
-      <MainImg onMouseEnter={()=>setCurr(true)} onMouseLeave={()=>setCurr(false)} src= {songInfo.urlLarge}>
+      <MainImg popup={popup} onMouseEnter={()=>setCurr(true)} onMouseLeave={()=>setCurr(false)} src= {songInfo.urlLarge}>
       </MainImg>
     </PlayerMainTag>
   )
@@ -26,21 +26,21 @@ export default connect(mapStateToProps, {setPopup})(PlayerMain);
 
 const PlayerMainTag = styled.div`
   background-color: rgba(20,20,20,.97);
-  position: absolute;
-  top: ${props=>props.popup? '0' : '1000vh'};
-  opacity:${props=>props.popup? '1' : '0'};
+  position: fixed;
+  height: ${props=>!props.popup? '0' : '100vh'};
+  /* opacity:${props=>props.popup? '1' : '0'}; */
   right: 350px;
   bottom: 81px;
   left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 1s ease-in-out;
+  transition: all 0.2s ease-in-out;
   z-index:9999;
 `
 
 const MainImg = styled.img`
-  height: 514px;
+  height: ${props=>!props.popup? '0' : '514px'};
   width: 514px;
   user-select:none;
   @media (max-width: 1000px) {
