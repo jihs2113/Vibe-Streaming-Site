@@ -8,5 +8,8 @@ import { playing } from "./playing";
 import { songList } from "./songList";
 import { songIndex } from "./songIndex";
 import { playList } from './playList';
-const rootReducer = combineReducers({ shuffleIndex, songInfo, songList, songIndex, popup, repeatIndex, navList, playing, playList});
+import { mkList } from "./mkList";
+
+const rootReducer = combineReducers({ mkList, songList, songIndex, shuffleIndex, songInfo, popup, repeatIndex, navList, playing, playList});
+
 export default rootReducer;

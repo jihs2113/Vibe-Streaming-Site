@@ -71,14 +71,20 @@ const GoVideo = (props) => {
               
                 <OneList>
                   <SelectOne onMouseEnter={()=> Over()} onMouseLeave={()=> Over()}>
+                      {/* <div className="kmk">
+                        <img 
+                            src={props.img} className="mk" alt=""/>
+                      </div> */}
+                      <Part>
                       <div className="kmk">
                         <img 
-                            src={props.m_url} className="mk" style={{width: 40, height: 40, }} alt=""/>
+                            src={props.img} className="mk" alt=""/>
                       </div>
-                      <Part>
-                        <Ta>{props.id}</Ta>
                         <Tl>
-                          <Td style={{color: "black"}}>{props.name}</Td>
+                          <div style={{display:"flex", flexDirection:"row"}}>
+                            <Ta>{props.id}.</Ta>
+                            <Td style={{color: "black"}}>{props.name}</Td>
+                          </div>
                           <Tc>{props.vocal}</Tc>
                         </Tl>
                       </Part>
@@ -137,10 +143,11 @@ const Tbody = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+  margin-right: 10px;
   flex-wrap:wrap;
-  width:500px;
-  max-width: 1270px;
-  
+  width:300px;
+  /* max-width: 964px; */
+  height:100%;
 
 `
 const OneList = styled.div`
@@ -159,19 +166,29 @@ const SelectOne = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    flex-direction: column;
     margin: 10px;
-    border-bottom: 1px solid aliceblue;
+    /* border-bottom: 1px solid aliceblue; */
     position: relative;
-    &:hover{
+    /* .kmk{
+      /* margin-left:20px; */
+
+      /* .mk{
+      width: 310px;
+      height: 174px; */
+    /* } */ 
+    /* } */
+    
+    /* &:hover{
       /* background: rgb(228, 228, 228);; */
-      cursor: pointer;
+      /* cursor: pointer;
       .kmk{
         background-color: rgba(0,0,0,.8);
       }
       .mk{
         /* background: rgb(228, 228, 228); */
-        opacity:0.3;
-      }
+        /* opacity:0.3; */
+      /* }
       &::after  {
       ${afterIcon}
         position: absolute;
@@ -184,9 +201,9 @@ const SelectOne = styled.div`
         margin-left: 10px;
         margin-top:0;
         color:black;
-        transition: height 0.5s ease-in,opacity 0.5s ease-in;
-      } 
-    }
+        transition: height 0.5s ease-in,opacity 0.5s ease-in; */
+     /* }  */
+    /* } */
     
     /* &.imgShowing-false{
         opacity: 1;
@@ -224,6 +241,17 @@ const Part = styled.div`
   display:flex;
   align-items:center;
   width:100%;
+  flex-direction: column;
+  justify-content:left;
+  line-height: 20px;
+  .kmk{
+      /* margin-left:20px; */
+
+      .mk{
+      width: 210px;
+      height: 174px;
+    }
+  }
 
 `
 
@@ -231,16 +259,23 @@ const Ta = styled.div`
   width:50px;
   height:100%;
   padding-right: 30px;
-  padding-left: 25px;
+  /* padding-left: 25px; */
+  /* display:flex;
+  justify-content:left; */
 
 `
 
 const Td = styled.div`
-  width:100%;
+  width:50%;
   height:100%;
   padding-right: 30px;
   color: rgb(153, 153, 153);
   font-size:14px;
+  display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
 
 `
 const Tc = styled.div`
@@ -252,11 +287,11 @@ const Tc = styled.div`
 
 `
 const Tl = styled.div`
-  flex-direction: column;
+    flex-direction: column;
     display: flex;
-    align-items: center;
+    justify-content:left;
     line-height: 20px;
-
+    margin:0 auto;
 `
 
 

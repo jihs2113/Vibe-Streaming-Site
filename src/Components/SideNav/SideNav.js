@@ -71,7 +71,7 @@ function SideNav () {
       const location = window.location.href.split('=')[1];
       const token = location.split('&')[0];
       console.log("token: ", token);
-      fetch("http://10.58.2.47:8000/account/sign-in" , {
+      fetch("http://10.58.0.37:8000/account/sign-in" , {
         method: "GET",
         headers : {
           "Content-type" : "application/json",

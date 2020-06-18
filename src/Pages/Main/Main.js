@@ -37,10 +37,10 @@ function Main () {
                         <LoadingChart/>
                     
                     </Content>
-                    <Content>
+                    <VContent>
                         <VideoChart/>
                     
-                    </Content>
+                    </VContent>
                     {/* <Content>
 
                         <span>asdads</span>

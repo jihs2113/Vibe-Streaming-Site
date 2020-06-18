@@ -15,7 +15,7 @@ function MainChart(props) {
     const [musicState, setMusicState ] = useState([]);
 
     useEffect(() => {
-        fetch("http://10.58.6.19:8000/music/chart")
+        fetch("http://10.58.0.37:8000/music/chart")
         .then((res) => res.json())
         .then((res) => setMusicState(res.data));
 

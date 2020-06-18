@@ -154,7 +154,7 @@ const SelectOne = styled.div`
       &::after  {
       ${afterIcon}
         position: absolute;
-        top: 20px;
+        top: 12px;
         bottom: 20px;
         left: 5px;
         background-position: -491px -439px;
