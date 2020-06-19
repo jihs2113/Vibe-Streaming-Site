@@ -57,7 +57,7 @@ function MainChart(props) {
                     <button className="left" onClick={()=>Pleft()}></button>
                     <button id="right" onClick={()=>Pright()}></button>
                     <h3 style={{display: "flex", alignItems: "flex-start" }}>
-                        <GoList onClick={()=>HandleLink()}>오늘 Top 100</GoList>
+                        <GoList onClick={()=>HandleLink()}>&emsp;오늘 Top 100</GoList>
                     </h3>
                     <Camp slideState={slideState}>
                       
@@ -70,6 +70,7 @@ function MainChart(props) {
                                 album={music.album}
                                 list={music.lyrics}
                                 select={music.select}
+                                rank={i+1}
                             />
                         ))}
                         
@@ -114,7 +115,6 @@ const Content = styled.div`
       position: relative;
       width: 100%;
       background-color: white;
-      
 `
 // const Title = styled.div`
 //       color: black;
@@ -122,7 +122,7 @@ const Content = styled.div`
 //       font-weight: 600;
 // `
 const List = styled.div`
-    padding: 18px 0;
+    padding: 18px 0 0 35px;
     /* max-width: 1273px; */
     position: relative;
     width: 100%;
@@ -131,7 +131,7 @@ const List = styled.div`
     width:40px;
     height:40px;
     position: absolute;
-    left:-30px;
+    
     top: 50%;
     z-index:1;
     border-radius:50%;
@@ -180,6 +180,7 @@ const GoList = styled.div`
     display:flex;
     align-items:center;
     cursor:pointer;
+    justify-content:center;
     &::after {
       ${afterIcon}
       top: 30px;
@@ -207,10 +208,9 @@ const Camp = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
     word-break: break-all;
-
     position: absolute;
     width: 100%;
-    left: ${props => props.slideState}px;
+    left: ${props => (props.slideState + 80)}px;
     transition: left ease-out 0.4s;
 
     /* justify-content:flex-start; */

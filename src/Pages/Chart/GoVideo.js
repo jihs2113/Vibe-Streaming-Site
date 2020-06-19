@@ -145,7 +145,7 @@ const Tbody = styled.div`
   margin-top: 10px;
   margin-right: 10px;
   flex-wrap:wrap;
-  width:300px;
+  width:310px;
   /* max-width: 964px; */
   height:100%;
 
@@ -154,7 +154,7 @@ const OneList = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 50%;
+  width: 100%;
   
 
 
@@ -248,7 +248,7 @@ const Part = styled.div`
       /* margin-left:20px; */
 
       .mk{
-      width: 210px;
+      width: 310px;
       height: 174px;
     }
   }
@@ -256,8 +256,9 @@ const Part = styled.div`
 `
 
 const Ta = styled.div`
-  width:50px;
+  width:10px;
   height:100%;
+  padding-left:5px;
   padding-right: 30px;
   /* padding-left: 25px; */
   /* display:flex;
@@ -266,7 +267,7 @@ const Ta = styled.div`
 `
 
 const Td = styled.div`
-  width:50%;
+  width:300px;
   height:100%;
   padding-right: 30px;
   color: rgb(153, 153, 153);

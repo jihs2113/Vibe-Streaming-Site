@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import MainChart from '../Chart/MainChart';
 import LoadingChart from '../Chart/LoadingChart';
 import VideoChart from '../Chart/VideoChart';
+import GenreChart from '../Chart/GenreChart';
 
 
 function Main () {
@@ -37,10 +38,13 @@ function Main () {
                         <LoadingChart/>
                     
                     </Content>
-                    <VContent>
+                    <Content>
                         <VideoChart/>
                     
-                    </VContent>
+                    </Content>
+                    <Content>
+                      <GenreChart/>
+                    </Content>
                     {/* <Content>
 
                         <span>asdads</span>
