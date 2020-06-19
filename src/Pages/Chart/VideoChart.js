@@ -58,7 +58,7 @@ function VideoChart() {
                     <button className="left" onClick={()=>Pleft()}></button>
                     <button id="right" onClick={()=>Pright()}></button>
                     <h3 style={{display: "flex", alignItems: "flex-start" }}>
-                        <GoList>뮤직 비디오 Top 50</GoList>
+                        <GoList>&emsp;뮤직 비디오 Top 50</GoList>
                     </h3>
                     <Camp slideState={slideState}>
                       
@@ -113,6 +113,7 @@ const Content = styled.div`
       position: relative;
       width: 100%;
       background-color: white;
+      overflow:hidden;
       
 `
 // const Title = styled.div`
@@ -121,7 +122,7 @@ const Content = styled.div`
 //       font-weight: 600;
 // `
 const List = styled.div`
-    padding: 50px 0 0 0;
+    padding: 50px 0 0 35px;
     /* max-width: 1273px; */
     position: relative;
     width: 100%;
@@ -130,7 +131,7 @@ const List = styled.div`
     width:40px;
     height:40px;
     position: absolute;
-    left:-30px;
+
     top: 50%;
     z-index:1;
     border-radius:50%;
@@ -209,7 +210,7 @@ const Camp = styled.div`
 
     position: absolute;
     /* width: 100%; */
-    left: ${props => props.slideState}px;
+    left: ${props => (props.slideState-38)}px;
     transition: left ease-out 0.4s;
 
     /* justify-content:flex-start; */

@@ -23,9 +23,19 @@ function PlayerRight ({popup,shuffleIndex,shuffle,setSongInfo, setSongIndex, set
   }, []);
 
   const removeSong = (index)=>{
+    let id = songList[index].id;
     let tmp = [...songList];
     tmp.splice(index,1);
     setSongList(tmp);
+    fetch(`${url}/music/playlist`, {
+      method: "DELETE",
+      headers: {
+        Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Indsc3hvMjExMkBuYXZlci5jb20ifQ.i9ZWIGY6MUxYXcL344nsrwBiXD4hpvEavLGdYfaBSOs",
+      },
+      body: JSON.stringify({
+        music_id: id,
+      }),
+    });
   }
 
   function onDragStart(e){
@@ -103,7 +113,7 @@ function PlayerRight ({popup,shuffleIndex,shuffle,setSongInfo, setSongIndex, set
             return(<Element></Element>)
           }else{
           return(  
-            <Element id={i} draggable onClick={!goto ? (()=>clickElement(i)): (()=>{})} onDragOver={(event)=>onDragOver(event)} onDragStart={(event)=>onDragStart(event)} onDragEnd={(event)=>onDragEnd(event)} >
+            <Element key={i} draggable onClick={!goto ? (()=>clickElement(i)): (()=>{})} onDragOver={(event)=>onDragOver(event)} onDragStart={(event)=>onDragStart(event)} onDragEnd={(event)=>onDragEnd(event)} >
               <SmallImg src={musicElement.urlSmall}/>
               <Text>
                 <TextTop >
@@ -237,17 +247,27 @@ pointer-events:none;
 
 const TextTop = styled.div`
 pointer-events:none;
+width:200px;
   font-size: 14px;
   line-height: 1.25em;
   color: #dfdfdf;
   letter-spacing:0.5px;
+  overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
 `;
 
 const TextBottom = styled.div`
 pointer-events:none;
+width:220px;
   font-size: 13px;
   line-height: 17px;
   color: #737373;
+  overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
 `;
 
 const Flex = styled.div`

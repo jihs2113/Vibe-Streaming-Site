@@ -82,7 +82,7 @@ const GoChart = (props) => {
                          
                       } */}
                       <Part>
-                        <Ta>{props.id}</Ta>
+                        <Ta>{props.rank}</Ta>
                         <Tl>
                           <Td style={{color: "black"}}>{props.name}</Td>
                           <Tc>{props.artist}</Tc>

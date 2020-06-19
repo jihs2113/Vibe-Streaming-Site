@@ -454,7 +454,10 @@ const TextTop = styled.div`
   line-height: 1.25em;
   color: #dfdfdf;
   letter-spacing:0.5px;
-  overflow:hidden;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+    word-break: break-all;
 `;
 
 const TextBottom = styled.div`
@@ -462,6 +465,10 @@ pointer-events:none;
   font-size: 13px;
   line-height: 17px;
   color: #737373;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+    word-break: break-all;
 `;
 
 const Icons = styled.div`
@@ -868,7 +875,7 @@ const Time = styled.div`
   font:10px;
   color:white;
   height:14px;
-  width:78px;
+  width:88px;
   display:flex;
   align-items:center;
   margin-right:20px;
