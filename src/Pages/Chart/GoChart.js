@@ -17,70 +17,21 @@ const GoChart = (props) => {
   const [ gokState, setGokState ] = useState(true);
 
  
-  // useEffect(() => {
-
-  //   fetch("/jh_data/jh.json")
-  //   .then((res) => res.json())
-  //   .then((res) => setMusicState(res.data));
-
-    // setMusicState(
-    //   musicState.map((d) => {
-    //     return{
-    //       id: d.id,
-    //       album: d.album,
-    //       img: d.m_url,
-    //       name: d.name,
-    //       vocal: d.vocal,
-    //       select:false,
-    //     };
-    //   })
-    // );
-    // setMusicState(musicState);
-
-    
-  // }, []);
-
   const Over = () => {
     setGokState(!gokState);
   }
-  // const Smart = (mart) =>{
-  //   setLikeState(!likeState)
-  //   setToggle(!toggle)
-  // }
 
   return (
         
           <Tbody>
             
-            {/* {musicState.map((d, i) => ( */}
-              
+        
                 <OneList>
                   <SelectOne onMouseEnter={()=> Over()} onMouseLeave={()=> Over()}>
                       <div className="kmk">
                         <img 
                             src={props.img} className="mk" style={{width: 40, height: 40, }} alt=""/>
                       </div>
-                      {/* { gokState ?
-                        ( <img 
-                          src={d.m_url} className="mk" style={{width: 40, height: 40, }} alt=""/>)
-                          : <Gok></Gok>
-
-                      } */}
-                      
-                     
-                      {/* <Gok src={d.m_url} >
-
-                      </Gok> */}
-                      {/* { gokState ?
-                        (
-                          <img 
-                            src={d.m_url} className="mk" style={{width: 40, height: 40, }} alt=""/>
-                         ) 
-                        : 
-                          <img 
-                            src={<Mplay></Mplay>} style={{width: 40, height: 40, }} alt=""/>
-                         
-                      } */}
                       <Part>
                         <Ta>{props.rank}</Ta>
                         <Tl>
@@ -90,10 +41,6 @@ const GoChart = (props) => {
                       </Part>
                   </SelectOne>
                 </OneList>
-                
-              
-            {/* ))} */}
-            
           </Tbody>
         
   );
@@ -167,21 +114,9 @@ const SelectOne = styled.div`
       } 
     }
     
-    /* &.imgShowing-false{
-        opacity: 1;
-        pointer-events: visible;
-        margin: auto;
-        
-    } */
+    
 
 `
-// const Gok = styled.img`
-//   src : url(${props => props.src});
-//   width:40px;
-//   height:40px;
-
-// `
-
 
 const Mplay = styled.div`
         &::after {

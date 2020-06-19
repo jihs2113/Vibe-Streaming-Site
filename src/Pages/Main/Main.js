@@ -5,7 +5,7 @@ import MainChart from '../Chart/MainChart';
 import LoadingChart from '../Chart/LoadingChart';
 import VideoChart from '../Chart/VideoChart';
 import GenreChart from '../Chart/GenreChart';
-
+import GoArtist from '../Chart/GoArtist';
 
 function Main () {
   return (
@@ -45,14 +45,11 @@ function Main () {
                     <Content>
                       <GenreChart/>
                     </Content>
-                    {/* <Content>
 
-                        <span>asdads</span>
-                    </Content>
                     <Content>
-
-                        <span>asdads</span>
-                    </Content> */}
+                      <GoArtist/>
+                    </Content>
+                  
                 </Container>
             </MainNav>
     </Body>
@@ -60,16 +57,6 @@ function Main () {
     
   )
 }
-
-// const Header = styled.div`
-//         bottom: 81px;
-//         left: 0;
-//         width: 225px;
-//         background-color: black;
-//         position: fixed;
-//         top: 0;
-//         z-index: 10100;
-// `
 
 const Body = styled.div`
     position: relative;

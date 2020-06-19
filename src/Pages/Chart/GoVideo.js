@@ -16,65 +16,17 @@ const GoVideo = (props) => {
   const [ toggle, setToggle ] = useState(true);
   const [ gokState, setGokState ] = useState(true);
 
- 
-  // useEffect(() => {
-
-  //   fetch("/jh_data/jh.json")
-  //   .then((res) => res.json())
-  //   .then((res) => setMusicState(res.data));
-
-    // setMusicState(
-    //   musicState.map((d) => {
-    //     return{
-    //       id: d.id,
-    //       album: d.album,
-    //       img: d.m_url,
-    //       name: d.name,
-    //       vocal: d.vocal,
-    //       select:false,
-    //     };
-    //   })
-    // );
-    // setMusicState(musicState);
-
-    
-  // }, []);
-
   const Over = () => {
     setGokState(!gokState);
   }
-  // const Smart = (mart) =>{
-  //   setLikeState(!likeState)
-  //   setToggle(!toggle)
-  // }
-
-  // console.log("zsk",saw);
-  // console.log("sc",gokState);
   
-
   return (
-        // <List>
-        //   <li className="ListItem">
-        //       <div className="ListImg">
-        //         <img src={props.m_url} style={{zIndex:"999999"}} alt=""/>
-
-        //       </div>
-
-        //   </li>
-
-
-        // </List>
-        
+       
           <Tbody>
-            
-            {/* {musicState.map((d, i) => ( */}
-              
+  
                 <OneList>
                   <SelectOne onMouseEnter={()=> Over()} onMouseLeave={()=> Over()}>
-                      {/* <div className="kmk">
-                        <img 
-                            src={props.img} className="mk" alt=""/>
-                      </div> */}
+
                       <Part>
                       <div className="kmk">
                         <img 
@@ -90,10 +42,7 @@ const GoVideo = (props) => {
                       </Part>
                   </SelectOne>
                 </OneList>
-                
-              
-            {/* ))} */}
-            
+      
           </Tbody>
         
   );
@@ -111,33 +60,6 @@ display: inline-block;
 content: "";
 background: url(${icon}) no-repeat;
 `;
-
-// const List = styled.div`
-//   margin-left: 16px;
-//   display: flex;
-//   flex-direction: column;
-//   margin-top: 10px;
-//   flex-wrap:wrap;
-//   width:500px;
-//   max-width: 1270px;
-//   .ListItem{
-//    display: flex;
-//    flex-direction: row;
-//    align-items: center;
-//    width: 50%;
-//    .ListImg{
-//     width:100%;
-//      height:100%;
-//      display: flex;
-//      align-items: center;
-//      justify-content: flex-start;
-//      margin: 10px;     
-//      position: relative;
-//    }
-//   }
-
-// `
-
 
 const Tbody = styled.div`
   display: flex;
@@ -170,56 +92,7 @@ const SelectOne = styled.div`
     margin: 10px;
     /* border-bottom: 1px solid aliceblue; */
     position: relative;
-    /* .kmk{
-      /* margin-left:20px; */
-
-      /* .mk{
-      width: 310px;
-      height: 174px; */
-    /* } */ 
-    /* } */
-    
-    /* &:hover{
-      /* background: rgb(228, 228, 228);; */
-      /* cursor: pointer;
-      .kmk{
-        background-color: rgba(0,0,0,.8);
-      }
-      .mk{
-        /* background: rgb(228, 228, 228); */
-        /* opacity:0.3; */
-      /* }
-      &::after  {
-      ${afterIcon}
-        position: absolute;
-        top: 20px;
-        bottom: 20px;
-        left: 5px;
-        background-position: -491px -439px;
-        width: 16px;
-        height: 20px;
-        margin-left: 10px;
-        margin-top:0;
-        color:black;
-        transition: height 0.5s ease-in,opacity 0.5s ease-in; */
-     /* }  */
-    /* } */
-    
-    /* &.imgShowing-false{
-        opacity: 1;
-        pointer-events: visible;
-        margin: auto;
-        
-    } */
-
 `
-// const Gok = styled.img`
-//   src : url(${props => props.src});
-//   width:40px;
-//   height:40px;
-
-// `
-
 
 const Mplay = styled.div`
         &::after {

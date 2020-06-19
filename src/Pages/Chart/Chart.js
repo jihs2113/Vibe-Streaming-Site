@@ -5,22 +5,13 @@ import icon from '../../Images/vibe.png';
 import TopChart from './TopChart';
 import { connect } from "react-redux";
 import { setMKList } from "../../store/actions/index";
+import ListModal from "./ListModal";
 
 function Chart (props) {
   let date = new Date();
   let day = date.getDate();
   const [time] = useState([day]);
-  // const [scrollState , setScrollState] = useState(false);
-  // useEffect(() => {
-  //   window.addEventListener("scroll", () => {
-  //     const isTop = window.scrollY <100 ;
-  //     if(isTop !==true) {
-  //       setScrollState({scrollState: true});
-  //     } else {
-  //       setScrollState({scrollState: false});
-  //     }
-  //   });
-  // }, []);
+
   const useScroll = () => {
     const [state, setState] = useState({
       x: 0,
@@ -37,39 +28,31 @@ function Chart (props) {
     }, []);
     return state;
   };
-  // const CloseNav = () =>{
-   
-  // }
+ 
+  const [modalState, setModalState]=useState(false);
+  const [musicState, setMusicState] =useState([]);
 
-  // const useClick = () =>{
+  const Cmodal =()=>{
+    setModalState(!modalState);
+    // const token = localStorage.getItem('access_token');
+    fetch(`http://10.58.0.37:8000/music/myplaylist`, {
+      method: 'GET' ,  
+      headers: {  
+        Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Indsc3hvMjExMkBuYXZlci5jb20ifQ.i9ZWIGY6MUxYXcL344nsrwBiXD4hpvEavLGdYfaBSOs"
+      },
+    })
+    .then((res) => res.json())
+    .then((res) => setMusicState(res.data));
+  }
+  const CloseModal = (close) =>{
+    
+    setModalState(!modalState)
+  }
 
-  // }
-  console.log("op", props.mkList.length);
   const { y } = useScroll();
-  // const { w } = useClick();
+ 
     return ( 
       <>
-      {/* {
-        props.mkList.length >=1 ?
-        (
-          <Nav style={{opacity: y> 80 ? "1" : "0"}}>
-            <Bar>
-              <Topic>오늘 Top 100</Topic>
-              <TopicPlay>
-                <PlayAll>
-                    <SelectAll>전체재생</SelectAll>
-                </PlayAll>
-                <PlaySelect>
-                    <RanPlay>랜덤재생</RanPlay>
-                </PlaySelect>
-                <More>
-                  <MoreDot></MoreDot>
-                </More>
-              </TopicPlay>
-            </Bar>
-          </Nav>
-        ) : null
-      } */}
          <Nav style={{opacity: y> 80 && props.mkList.length===0 ? "1" : "0"}}>
            <Bar>
              <Topic>오늘 Top 100</Topic>
@@ -105,7 +88,7 @@ function Chart (props) {
                     <span className="Bottom">
                       맨 아래에 추가
                     </span>
-                    <span className="MyAdd">
+                    <span className="MyAdd" onClick={()=>Cmodal()}>
                       내 플레이리스트 추가
                     </span>
                     <span className="Buy">
@@ -150,6 +133,26 @@ function Chart (props) {
               </StoPlay>
             </AddList>
             <TrackList>
+                  <Tag className={`modalBackground modalShowing-${modalState}`}>
+                  <ModalInner>
+                    <Close onClick={() => Cmodal()}></Close>
+                    <ModalText>
+                        <span>
+                            내 플레이리스트 추가                        
+                        </span>
+                    </ModalText>
+                    { musicState.map((list, i) => (
+                        <ListModal className="Lole"
+                          // mod={modalState}
+                          qauntity={list.qauntity}
+                          name={list.name}
+                          id={list.id}
+                          CloseModal={CloseModal}
+                          />
+                          
+                    ))}
+                      </ModalInner> 
+                  </Tag>
               <TopChart/>
             </TrackList>
           </Content>
@@ -181,8 +184,10 @@ export default connect(mapStateToProps,{ setMKList })(withRouter(Chart));
   `;
 
   const Bar = styled.div`
-  margin: 13px 38px 13px 43px;
-  max-width: 1170px;
+  /* margin: 13px 38px 13px 73px; */
+  /* max-width: 1170px;  */
+  width:964px;
+  margin:0 auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -246,8 +251,8 @@ const Option = styled.div`
             /* background-color:white; */
           }
         }
-      
-    }
+      }
+    
       .ManyBtn{
         position: relative;
         margin-left: -10px;
@@ -276,8 +281,8 @@ const Option = styled.div`
             width: 16px;
             height: 16px;
             transition: height 0.5s ease-in,opacity 0.5s ease-in;
-          }
             }
+          }
             .Bottom{
               cursor: pointer;
               display: flex;
@@ -288,15 +293,15 @@ const Option = styled.div`
               color: #232323;
               vertical-align: top;
               &::before {
-              ${beforeIcon}
-              top: 30px;
-              bottom: 0;
-              left: 46px;
-              background-position: -718px -554px;
-              width: 16px;
-              height: 16px;
-              transition: height 0.5s ease-in,opacity 0.5s ease-in;
-            }
+                ${beforeIcon}
+                top: 30px;
+                bottom: 0;
+                left: 46px;
+                background-position: -718px -554px;
+                width: 16px;
+                height: 16px;
+                transition: height 0.5s ease-in,opacity 0.5s ease-in;
+              }
             }
             .MyAdd{
               cursor: pointer;
@@ -399,8 +404,8 @@ const Option = styled.div`
 `
 
 const Container = styled.div`
-  padding-bottom: 467px;
-  height: 100vh;
+  width:964px;
+  margin:0 auto;
   /* padding-left: 225px; */
   background-color: white;
 
@@ -412,7 +417,7 @@ const Content = styled.div`
       width: 964px;
       /* margin-left: 12%; */
       margin-top: 5%;
-      background-color: white;
+      background-color: #fbfbfb;
       z-index:9999;
 `
 const Title = styled.div`
@@ -586,6 +591,99 @@ const TrackList = styled.div`
   width: 100%;
   height: 100%;
 
+
 `
 
+const Tag = styled.div`
+  width:100%;
+  height:100%;
+  padding: 12px 0;
+  margin:0 auto;
+  display:flex;
+  text-align: center;
+  justify-content: center;
+  &.modalBackground{
+    opacity: 0;
+    pointer-events: none;
+    /* transition: opacity 0.4s ease-in-out; */
+     width:350px;
+     height:350px;
+     position: absolute;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     top: 0;
+     background-color: #fff;
+     /* transition: all .2s ease; */
+     box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2);
+     border-radius:6px;
+     z-index:2;
+     margin-top:200px;
+  }
+  &.modalShowing-true{
+    opacity: 1;
+    pointer-events: visible;
+    /* margin: auto; */
+  }
+
+`
+
+const ModalInner = styled.div`
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    .Lole{
+      overflow-y: scroll; 
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+        background: #141414;
+        border-radius: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #999;
+        border-radius: 5px;
+    }
+    }
+    /* vertical-align: middle; */
+
+`
+const Close = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    padding-top:10px;
+    padding-right: 7%;
+    cursor: pointer;
+    &::after {
+      ${afterIcon}
+      top: 30px;
+      bottom: 0;
+      left: 46px;
+      width: 14px;
+      height: 14px;
+      margin-top: 10px;
+      background-position: -387px -661px;
+      transition: height 0.5s ease-in,opacity 0.5s ease-in;
+      background-color:white;
+    }
+
+`
+
+const ModalText = styled.div`
+    width:100%;
+    right:0;
+    color: black;
+    font-size:14px;
+    line-height: 22px;
+    margin:0 auto;
+    font-size: 15px;
+    line-height: 19px;
+    text-align: center;
+    font-weight: 700;
+    padding-bottom:30px;
+    span{
+        
+    }
+`
 

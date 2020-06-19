@@ -112,7 +112,7 @@ const Container = styled.div`
   margin-bottom:20px;
  
 
-  background-color: white;
+  background-color: #fbfbfb;
 
 `
 
@@ -120,7 +120,7 @@ const Content = styled.div`
       /* max-width: 1273px; */
       position: relative;
       width: 100%;
-      background-color: white;
+      background-color: #fbfbfb;
       overflow:hidden;
       
 `
