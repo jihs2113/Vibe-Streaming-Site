@@ -13,7 +13,7 @@ import MusicDetail from "./Pages/Detail/Music/MusicDetail";
 import Layout from "./Components/Layout/Layout";
 import TopChart from "./Pages/Chart/TopChart";
 import MainChart from "./Pages/Chart/MainChart";
-
+import PlayListDetail from "./Pages/Detail/PlayList/PlayListDetail";
 
 class Routes extends Component {
   render() {
@@ -33,7 +33,8 @@ class Routes extends Component {
             <Route exact path="/library/playlists" component={MypagePlaylists} />
             <Route exact path="/player" component={Player} /> {/* jintae - 첫 번째 character 대문자로 수정 */}
             <Route exact path="/sidenav" component={Pidenav} /> {/* jintae - 첫 번째 character 대문자로 수정 */}
-            <Route exact path="/track" component={MusicDetail}/>
+            <Route exact path="/track/:id" component={MusicDetail}/>
+            <Route exact path="/mylist/:id" component={PlayListDetail}/>
             <Route exact path="/layout" component={Layout}/>
           </Switch>
         </Layout>

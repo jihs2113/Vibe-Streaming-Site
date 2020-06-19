@@ -1,55 +1,65 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import SideNav from '../../../Components/SideNav/SideNav';
+import { API } from '../../../config'; 
 import icon from '../../../Images/vibe.png';
 
-function MusicDetail() {
+function MusicDetail(props) {
+    const [ musicDetail, setMusicDetail ] = useState([]);
+    
+    useEffect(() => {
+        const token = localStorage.getItem('access_token');
+        fetch(`${API}/music/detail/${props.match.params.id}` , {
+        method: "GET",
+        headers : {
+            "Content-type" : "application/json",
+            "Authorization" : token
+        },
+        })
+        .then(res => res.json())
+        .then(res => setMusicDetail(res.data))
+        .catch(err => console.log("err: ", err));
+      },[])
+
     return (
         <MusicDetailTag>
-            <SideNav/>
-            <Container>
-                <Content>
-                    <Section>
-                        <ArtistWrap>
-                            <ArtistImgBox>
-                                <img src="https://musicmeta-phinf.pstatic.net/album/004/578/4578032.jpg?type=r480Fll&v=20200525175904" alt="albumImg"/>
-                            </ArtistImgBox>
-                            <ArtistInfo>
-                                <AreaTextBox>
-                                    <h2>Beautiful</h2>
-                                    <p className="artistName">김우석</p>
-                                    <div className="pTagBox">
-                                        <p className="lyrics">작사</p>
-                                        <p className="composition">작곡</p>
-                                        <p className="arrangement">편곡</p>
-                                    </div>
-                                </AreaTextBox>
-                                <AreaButtonBox>
-                                    <Button>
-                                        <button className="playBtn" type="button">
-                                            <span>재생</span>
-                                        </button>
-                                    </Button>
-                                    <Button>
-                                        <button className="mp3Btn" type="button">
-                                            <span>MP3 구매</span>
-                                        </button>
-                                    </Button>
-                                    <Button>
-                                        <button className="likeBtn" type="button"></button>
-                                        <button className="addBtn" type="button"></button>
-                                    </Button>
-                                </AreaButtonBox>
-                            </ArtistInfo>
-                        </ArtistWrap>
-                        <div>
-                            <div>
-                                <h3>가사</h3>
+            <Section>
+                <ArtistWrap>
+                    <ArtistImgBox>
+                        <img src={musicDetail.image_url} alt="albumImg"/>
+                    </ArtistImgBox>
+                    <ArtistInfo>
+                        <AreaTextBox>
+                            <h2>{musicDetail.name}</h2>
+                            <p className="artistName">{musicDetail.artist}</p>
+                            <div className="pTagBox">
+                                <p className="lyrics">{musicDetail.writer}}</p>
+                                <p className="composition">{musicDetail.composer}</p>
+                                <p className="arrangement">{musicDetail.arranger}</p>
                             </div>
-                        </div>
-                    </Section>
-                </Content>
-            </Container>
+                        </AreaTextBox>
+                        <AreaButtonBox>
+                            <Button>
+                                <button className="playBtn" type="button">
+                                    <span>재생</span>
+                                </button>
+                            </Button>
+                            <Button>
+                                <button className="mp3Btn" type="button">
+                                    <span>MP3 구매</span>
+                                </button>
+                            </Button>
+                            <Button>
+                                <button className="likeBtn" type="button"></button>
+                                <button className="addBtn" type="button"></button>
+                            </Button>
+                        </AreaButtonBox>
+                    </ArtistInfo>
+                </ArtistWrap>
+                <LyricsWrap>
+                    <h3>가사</h3>
+                    <p>{musicDetail.lyrics}</p>
+                </LyricsWrap>
+            </Section>
         </MusicDetailTag>
     );
 }
@@ -63,32 +73,9 @@ const beforeIcon = css`
 `;
 
 const MusicDetailTag = styled.div`
-    height: 100vh;
-`;
-
-const Container = styled.div`
-  height: 100%;
-  padding-left: 250px;
-  background: ${props=> props.theme.color.white};
-  @media(max-width: 768px) {
-    padding-left: 0;
-  }
-`;
-
-const Content = styled.div`
-  position: absolute;
-  top: 0;
-  left: 250px;
-  right: 0;
-  height: 100%;
-  width: 964px;
-  margin: 0 auto;
-  @media(max-width: 768px) {
-    width: 100%;
-    left: 0;
-    padding: 67px 0 0;
-    margin: 0 22px;
-  }
+    height: 100%;
+    width: 964px;
+    margin: 0 auto;
 `;
 
 const Section = styled.section`
@@ -194,4 +181,20 @@ const Button = styled.div`
         }
     }
     margin-left: 10px;
+`;
+
+const LyricsWrap = styled.div`
+    padding-top: 30px;
+    border-top: 1px solid #e4e4e4;
+    h3 {
+        font-size: 20px;
+        line-height: 1.4;
+        padding: 10px 0;
+    }
+    p {
+        font-size: 18px;
+        line-height: 1.4;
+        padding-right: 50%;
+        padding-bottom: 200px;
+    }
 `;

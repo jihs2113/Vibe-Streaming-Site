@@ -21,14 +21,14 @@
             "artist_img": "https://musicmeta-phinf.pstatic.net/artist/000/077/77391.jpg?type=ff300_300&v=20200331181507"
         }
     ],
-    "playlist" : [
+    "data" : [
         {
-            "playlist_id" : 1,
+            "id" : 1,
             "name" : "FeelTheVibe",
             "qauntity" : 3
         },
         {
-            "playlist_id" : 2,
+            "id" : 2,
             "name" : "naverVibe",
             "qauntity" : 1
         }

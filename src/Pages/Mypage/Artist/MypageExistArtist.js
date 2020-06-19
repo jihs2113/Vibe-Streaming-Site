@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import icon from '../../../Images/vibe.png';
 
 function MypageExistArtist({ stateLike, onRemove, artistArray }) {
-  
-    console.log("stateLike: ", stateLike);
     return (
         <Section stateLike={stateLike}>
             <div className="inner">

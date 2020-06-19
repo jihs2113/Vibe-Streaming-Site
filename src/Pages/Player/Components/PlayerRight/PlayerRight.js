@@ -95,6 +95,7 @@ function PlayerRight ({popup,shuffleIndex,shuffle,setSongInfo, setSongIndex, set
     }else{
       setSongArray(songList);
     }
+    console.log("changed");
   },[songList, shuffleIndex]);
 
   return (

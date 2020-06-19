@@ -40,7 +40,6 @@ function Main () {
                     </Content>
                     <Content>
                         <VideoChart/>
-                    
                     </Content>
                     <Content>
                       <GenreChart/>
