@@ -119,9 +119,9 @@ const Part = styled.div`
   line-height: 20px;
   .kmk{
       /* margin-left:20px; */
-
+      width:100%;
       .mk{
-      width: 310px;
+      width: 100%;
       height: 174px;
     }
   }

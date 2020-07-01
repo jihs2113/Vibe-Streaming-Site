@@ -43,7 +43,33 @@ function Chart (props) {
     })
     .then((res) => res.json())
     .then((res) => setMusicState(res.data));
+
+    Hpmodal();
   }
+
+  const Hpmodal = (id) => {
+    console.log("kkj",id);
+    fetch(`http://10.58.0.37:8000/music/myplaylist`, {
+        method: "POST" ,  
+        headers: {  
+            Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Indsc3hvMjExMkBuYXZlci5jb20ifQ.i9ZWIGY6MUxYXcL344nsrwBiXD4hpvEavLGdYfaBSOs",
+        },
+        body: JSON.stringify({
+            music_id: props.mkList,
+        }),
+        })
+        .then(response => response.json())
+        .then(response => 
+            {
+            if(response.count === 0){
+             alert("이미 담은 곡입니다.");
+            }else if(response.count>=1){
+                alert(response.count+"곡이 담겼습니다.");
+            }
+            }
+            );
+  }
+
   const CloseModal = (close) =>{
     
     setModalState(!modalState)
@@ -96,7 +122,7 @@ function Chart (props) {
                     </span>
                 </div>
                 <button className="SelectPly">
-                    <span className="PlyBtn">선택한 곡 재생</span>
+                    <span className="PlyBtn" onClick={()=>Hpmodal(props.mkList)}>선택한 곡 재생</span>
                 </button>
             </div>
           </div>
@@ -605,20 +631,20 @@ const Tag = styled.div`
   &.modalBackground{
     opacity: 0;
     pointer-events: none;
-    /* transition: opacity 0.4s ease-in-out; */
-     width:350px;
-     height:350px;
-     position: absolute;
-     left: 0;
-     right: 0;
-     bottom: 0;
-     top: 0;
-     background-color: #fff;
-     /* transition: all .2s ease; */
-     box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2);
-     border-radius:6px;
-     z-index:2;
-     margin-top:200px;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: rgba(0,0,0,0.16);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2);
+    border-radius: 6px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   &.modalShowing-true{
     opacity: 1;
@@ -629,8 +655,10 @@ const Tag = styled.div`
 `
 
 const ModalInner = styled.div`
-    width:100%;
+    width:350px;
+    height: 350px;
     display: flex;
+    background-color:white;
     flex-direction: column;
     .Lole{
       overflow-y: scroll; 
@@ -676,6 +704,7 @@ const ModalText = styled.div`
     color: black;
     font-size:14px;
     line-height: 22px;
+    background-color:white;
     margin:0 auto;
     font-size: 15px;
     line-height: 19px;

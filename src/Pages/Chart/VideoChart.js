@@ -25,13 +25,13 @@ function VideoChart() {
         if(slideState==0){
             return;
         }
-        setSlideState(slideState+900);
+        setSlideState(slideState+940);
     }
     const Pright = () =>{
-        if(slideState==-2700){
+        if(slideState==-2820){
             return;
         }
-      setSlideState(slideState-900);
+      setSlideState(slideState-940);
     }
 
     return (
