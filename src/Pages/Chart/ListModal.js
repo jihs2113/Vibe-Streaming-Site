@@ -70,6 +70,7 @@ const Inner = styled.div`
     width:100%;
     display: flex;
     flex-direction: column;
+    background-color: white;
     /* vertical-align: middle; */
 
  `
