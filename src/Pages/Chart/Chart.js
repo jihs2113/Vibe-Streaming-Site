@@ -174,8 +174,7 @@ function Chart (props) {
                           name={list.name}
                           id={list.id}
                           CloseModal={CloseModal}
-                          />
-                          
+                          />                          
                     ))}
                       </ModalInner> 
                   </Tag>
@@ -186,7 +185,6 @@ function Chart (props) {
       </>
      )
   }
-
   
 const mapStateToProps = (state)=>{
   return{
@@ -195,7 +193,6 @@ const mapStateToProps = (state)=>{
 };
 
 export default connect(mapStateToProps,{ setMKList })(withRouter(Chart));
-
 
   const beforeIcon = css`
   display: block;
@@ -210,8 +207,6 @@ export default connect(mapStateToProps,{ setMKList })(withRouter(Chart));
   `;
 
   const Bar = styled.div`
-  /* margin: 13px 38px 13px 73px; */
-  /* max-width: 1170px;  */
   width:964px;
   margin:0 auto;
   display: flex;
